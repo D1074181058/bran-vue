@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>燒烤店 </title>
+{% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div style="text-align:right">
+    <a href="#">登入</a>
+    <a>/</a>
+    <a href="#">註冊</a>
+</div>
+
+<div>
+<div class="_left">
+    <span style="vertical-align:middle">
+    <a href="/">
+        <img  src="{% static "images/招牌.png" %}"  />
+    </a>
+    </span>
+     <ul class="drop-down-menu" >
+        <li><a href="#">品牌</a>
+        </li>
+        <li><a href="#">最新消息</a>
+        </li>
+        <li><a href="#">菜色種類</a>
+            <ul>
+                <li><a href="/beef">牛肉</a>
+                </li>
+                <li><a href="/pig">豬肉</a>
+                </li>
+                <li><a href="/chicken">雞肉</a>
+                </li>
+                <li><a href="/lamb">羊肉</a>
+                </li>
+                <li><a href="/seafood">海鮮</a>
+                </li>
+                <li><a href="/vegetables">蔬菜</a>
+                </li>
+                <li><a href="/agaricus">菇類</a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">關於我們</a>
+        </li>
+     </ul>
+</div>
+</div>
+
+
+
+
+<div class="slider_container" >
+    <div>
+		<img  src="{% static "images/店內/菜色1.jpg" %}"  />
+    </div>
+    <div>
+		<img  src="{% static "images/店內/菜色2.jpg"  %}"  />
+    </div>
+</div>
+
+
+</body>
+</html>
