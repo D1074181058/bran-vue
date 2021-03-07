@@ -16,19 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from myapp.views import sayhello,hello,pig,beef,chicken,seafood,agarigus,vegetables,lamb,test
+from myapp import views
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',hello),
-    url(r'^pig/',pig),
-    url(r'^beef/',beef),
-    url(r'^chicken/',chicken),
-    url(r'^lamb/',lamb),
-    url(r'^seafood/',seafood),
-    url(r'^agaricus/',agarigus),
-    url(r'^vegetables/',vegetables),
+    url(r'^$',views.hello),
+    url(r'^pig/',views.pig),
+    url(r'^beef/',views.beef),
+    url(r'^chicken/',views.chicken),
+    url(r'^lamb/',views.lamb),
+    url(r'^seafood/',views.seafood),
+    url(r'^agaricus/',views.agarigus),
+    url(r'^vegetables/',views.vegetables),
 
 
     url(r'^0/',test),
