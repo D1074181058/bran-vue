@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^vegetables/',views.vegetables),
 
 
-    url(r'^0/',test),
+    url(r'^0/',views.test),
 
 
 
