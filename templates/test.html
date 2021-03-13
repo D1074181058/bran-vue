@@ -1,15 +1,80 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    {% load static %}
-    <link href="{% static "css/style3.css" %}" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 960px;
+            background-color: salmon;
+            margin: auto;
+
+    }
+        .column{
+            padding: 10px;
+            margin:10px;
+            width: 280px;
+            background-color: sienna;
+            float:left;
+        }
+        .column img{
+            width: 100%;
+        }
+        .clear-box{
+            clear: both;
+            height: 0px;
+        }
+
+    </style>
 </head>
 <body>
-<div class="sitebody">
-　<div class="header">header</div>
-　<div class="sidebar_left">sidebar_left</div>
-　<div class="sidebar_right"><img src="https://i.imgur.com/mjyjOq0.gifv" width="100px" height="100px" /></div>
-　<div class="content">content</div>
-　<div class="footer">footer</div>
-</div>
+    <div class="container">
+        <div class="column">
+            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
+            <h3>title</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
+            </p>
+        </div>
+        <div class="column">
+            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
+            <h3>title</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
+            </p>
+        </div>
+        <div class="column">
+            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
+            <h3>title</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
+            </p>
+        </div>
+        <div class="clear-box">
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="column">
+            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
+            <h3>title</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
+            </p>
+        </div>
+        <div class="column">
+            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
+            <h3>title</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
+            </p>
+        </div>
+        <div class="column">
+            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
+            <h3>title</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
+            </p>
+        </div>
+        <div class="clear-box">
+
+        </div>
+    </div>
 </body>
 </html>
