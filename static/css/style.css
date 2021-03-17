@@ -35,7 +35,7 @@ ul { /* 取消ul預設的內縮及樣式 */
     }
 
      ul.drop-down-menu a {
-        background-color: #fff;
+        background-color:PapayaWhip;
         color: #333;
         display: block;
         padding: 0 30px;

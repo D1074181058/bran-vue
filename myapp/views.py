@@ -2,8 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from datetime import datetime
+from myapp.models import member
+
 
 def sayhello(request):
     return HttpResponse("Django")
@@ -32,6 +34,17 @@ def agarigus(request):
 def vegetables(request):
     now=datetime.now()
     return render(request,"vegetables.html",locals())
+def login(request):
+    if request.method =="POST":
+        Name=request.POST['Name']
+        account = request.POST['account']
+        password = request.POST['password']
+        unit = member.objects.create(Name=Name,account=account,password=password)
+        unit.save()
+        return redirect('/')
+    else:
+        massage='輸入'
+    return render(request, "login.html", locals())
 
 
 def test(request):
