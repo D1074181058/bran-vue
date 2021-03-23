@@ -46,32 +46,34 @@ def signup(request):
             date = upform.cleaned_data['date']
             phone = upform.cleaned_data['phone']
             address = upform.cleaned_data['address']
-            unit = member.objects.create(Name=Name,account=account,password=password,email=email,date=date,phone=phone,address=address)
+            unit = member.objects.create(Name=Name,account=account,password=password,email=email,
+                                         date=date,phone=phone,address=address)
             unit.save()
             return redirect('/')
         else:
             message='有欄位錯誤'
     else:
-
         upform = form.signupform()
 
     return render(request, "signup.html", locals())
 def login(request):
     if request.method =="POST":
-        account = request.POST['account']
-        password = request.POST['password']
-        try:
-            unit = member.objects.get(account=account,password=password)
-        except member.DoesNotExist:
-            unit =None
+        inform = form.loginform(request.POST)
+        if inform.is_valid():
+            account = inform.cleaned_data['account']
+            password = inform.cleaned_data['password']
+            try:
+                unit = member.objects.get(account=account,password=password)
+                message = '登入成功'
 
-        if unit != None:
-            message='登入成功'
-            return redirect('/')
+            except member.DoesNotExist:
+                message = '該用戶尚未註冊'
         else:
-            message='123'
+            message='有欄位錯誤'
     else:
         message='輸入'
+        inform = form.loginform()
+
     return render(request, "login.html", locals())
 
 

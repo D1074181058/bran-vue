@@ -11,12 +11,11 @@
 <form action="." method="POST" name="form1">
       {% csrf_token %}
       <table border="1">
-
           <tr>
-              <th>帳號</th><td><input type="text" name="account" id="account"></td>
+              <th>帳號</th><td>{{ inform.account }}</td>
           </tr>
           <tr>
-              <th>密碼</th><td><input type="text" name="password" id="password"></td>
+              <th>密碼</th><td>{{ inform.password }}</td>
           </tr>
           <tr>
               <th align="center"><input type="submit" name="button" id="button" value="送出">
@@ -24,6 +23,7 @@
           </tr>
       </table>
   </form>
+
 <span style="color: red">{{ message }}</span>
 </body>
 </html>
