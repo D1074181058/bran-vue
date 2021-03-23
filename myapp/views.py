@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from datetime import datetime
 from myapp.models import member
+from myapp import form
 
 
 def sayhello(request):
@@ -34,16 +35,43 @@ def agarigus(request):
 def vegetables(request):
     now=datetime.now()
     return render(request,"vegetables.html",locals())
+def signup(request):
+    if request.method =="POST":
+        upform=form.signupform(request.POST)
+        if upform.is_valid():
+            Name=upform.cleaned_data['Name']
+            account = upform.cleaned_data['account']
+            password = upform.cleaned_data['password']
+            email = upform.cleaned_data['email']
+            date = upform.cleaned_data['date']
+            phone = upform.cleaned_data['phone']
+            address = upform.cleaned_data['address']
+            unit = member.objects.create(Name=Name,account=account,password=password,email=email,date=date,phone=phone,address=address)
+            unit.save()
+            return redirect('/')
+        else:
+            message='有欄位錯誤'
+    else:
+
+        upform = form.signupform()
+
+    return render(request, "signup.html", locals())
 def login(request):
     if request.method =="POST":
-        Name=request.POST['Name']
         account = request.POST['account']
         password = request.POST['password']
-        unit = member.objects.create(Name=Name,account=account,password=password)
-        unit.save()
-        return redirect('/')
+        try:
+            unit = member.objects.get(account=account,password=password)
+        except member.DoesNotExist:
+            unit =None
+
+        if unit != None:
+            message='登入成功'
+            return redirect('/')
+        else:
+            message='123'
     else:
-        massage='輸入'
+        message='輸入'
     return render(request, "login.html", locals())
 
 

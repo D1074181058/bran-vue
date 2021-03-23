@@ -30,7 +30,9 @@ urlpatterns = [
     url(r'^agaricus/',views.agarigus),
     url(r'^vegetables/',views.vegetables),
 
-    url(r'^login/$',views.login),
+    url(r'^signup/',views.signup),
+    url(r'^login/',views.login),
+
     #url(r'^login1/$',views.login1),
     #url(r'^login2/$',views.login2),
 

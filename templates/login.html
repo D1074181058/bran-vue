@@ -7,13 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body style="background-color:PapayaWhip">
-  <form action="." method="POST" name="form1">
+<body>
+<form action="." method="POST" name="form1">
       {% csrf_token %}
       <table border="1">
-          <tr>
-              <th>姓名</th><td><input type="text" name="Name" id="Name"></td>
-          </tr>
+
           <tr>
               <th>帳號</th><td><input type="text" name="account" id="account"></td>
           </tr>
@@ -26,5 +24,6 @@
           </tr>
       </table>
   </form>
+<span style="color: red">{{ message }}</span>
 </body>
 </html>
