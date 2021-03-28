@@ -8,8 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-<form action="." method="POST" name="form1">
+<form action="/login/" method="POST" name="form1">
       {% csrf_token %}
+      {% if log == 'login' %}
+        <div><a href="/logout">登出</a></div>
+      {% else %}
       <table border="1">
           <tr>
               <th>帳號</th><td>{{ inform.account }}</td>
@@ -22,6 +25,7 @@
               <input type="reset" name="button2" id="button2" value="重設"></th>
           </tr>
       </table>
+      {% endif %}
   </form>
 
 <span style="color: red">{{ message }}</span>

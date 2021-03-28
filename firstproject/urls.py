@@ -21,7 +21,7 @@ from myapp import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.hello),
+    url(r'^$',views.home),
     url(r'^pig/',views.pig),
     url(r'^beef/',views.beef),
     url(r'^chicken/',views.chicken),
@@ -32,6 +32,7 @@ urlpatterns = [
 
     url(r'^signup/',views.signup),
     url(r'^login/',views.login),
+    url(r'^logout/',views.logout),
 
     #url(r'^login1/$',views.login1),
     #url(r'^login2/$',views.login2),

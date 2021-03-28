@@ -30,51 +30,27 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="column">
-            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
-            <h3>title</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
-            </p>
-        </div>
-        <div class="column">
-            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
-            <h3>title</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
-            </p>
-        </div>
-        <div class="column">
-            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
-            <h3>title</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
-            </p>
-        </div>
-        <div class="clear-box">
+   <input type="text" id="sign01"> +
+<input type="text" id="sign02"> =
+<input type="text" id="sign03">
+<input type="button" value="計算" id="tag">
+<script>
+    $('#tag').click(function () {  {# 'click'是滑鼠點選事件 #}
+        $.ajax({
+            url: '/ajax_add/', {# 請求的url地址 #}
+            type: 'GET',  {# 請求方式 #}
+            'data': {
+                sign01: $('#sign01').val(),
+                'sign02': $('#sign02').val()
+            },  {# 傳送的資料 #}
+            success: function (res) {
+                $('#sign03').val(res);
+            },  {# 回撥函式(執行成功時被呼叫)  res:返回的資料 #}
+        });
+    });
+    {# 裡面所有的key都可以寫成字串 #}
+</script>
 
-        </div>
-    </div>
-    <div class="container">
-        <div class="column">
-            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
-            <h3>title</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
-            </p>
-        </div>
-        <div class="column">
-            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
-            <h3>title</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
-            </p>
-        </div>
-        <div class="column">
-            <img src="https://fakeimg.pl/200x150/ff0000/000" class="float-img">
-            <h3>title</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, molestiae nisi beatae tenetur minima consequuntur aliquid a temporibus incidunt dolores architecto voluptatem laborum illo omnis ipsa asperiores tempora blanditiis mollitia.
-            </p>
-        </div>
-        <div class="clear-box">
-
-        </div>
-    </div>
+<span style="color: red">{{ res }}</span>
 </body>
 </html>
