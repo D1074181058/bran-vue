@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
+from django.conf.urls import url,include
 from myapp import views
 
 
@@ -32,6 +32,7 @@ urlpatterns = [
 
     url(r'^signup/',views.signup),
     url(r'^login/',views.login),
+    url(r'^captcha/',include('captcha.urls')),
     url(r'^logout/',views.logout),
 
     #url(r'^login1/$',views.login1),
