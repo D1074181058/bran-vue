@@ -37,14 +37,8 @@ urlpatterns = [
 
     #url(r'^login1/$',views.login1),
     #url(r'^login2/$',views.login2),
-
-
-    url(r'^0/',views.test),
-
-
-
-
-
-
     #url(r'^hello/(\w+)/',hello),
+
+
+
 ]

@@ -6,14 +6,24 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    {% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body style="background-color:PapayaWhip">
+<div >
+    <div class="_left">
+    <span style="vertical-align:middle">
+        <a href="/">
+        <img  src="{% static "images/招牌.png" %}"  />
+        </a>
+    </span>
+    </div>
 <form action="/login/" method="POST" name="form1">
       {% csrf_token %}
       {% if log == 'login' %}
         <div><a href="/logout">登出</a></div>
       {% else %}
-      <table border="1">
+      <table >
           <tr>
               <th>帳號</th><td>{{ inform.account }}</td>
           </tr>
@@ -23,11 +33,12 @@
           <tr>
               <th>驗證碼</th><td>{{ inform.captcha }}</td>
           </tr>
-          <tr>
-              <th align="center"><input type="submit" name="button" id="button" value="送出">
-              <input type="reset" name="button2" id="button2" value="重設"></th>
-          </tr>
+
       </table>
+          <div class="center">
+              <input type="submit" name="button" id="button" value="送出">
+              <input type="reset" name="button2" id="button2" value="重設">
+          </div>
       {% endif %}
   </form>
 

@@ -4,4 +4,7 @@
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
   </component>
+  <component name="UnicodeBrowser">
+    <option name="fontName" value="JetBrains Mono" />
+  </component>
 </project>

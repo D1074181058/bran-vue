@@ -184,7 +184,7 @@ margin-right:auto;
 }
 
 
-    .sidebar_left{
+.sidebar_left{
 background-color:#FFECC9;
 width:10%;
 height:85%;
@@ -193,12 +193,9 @@ line-height:400px;
 float:left;
 }
 
-    ._left{
-
+._left{
 width:100%;
 height:15%;
-
-
 }
 ._left a img {
     width:30%;

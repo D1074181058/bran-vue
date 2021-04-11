@@ -130,12 +130,5 @@ def hlogout(request):
 
 
 
-def test(request):
-    now=datetime.now()
-    return render(request,"test.html",locals())
 
-def test2(request):
-    sign01 = request.GET.get('sign01')
-    sign02 = request.GET.get('sign02')
-    sign03 = int(sign01) + int(sign02)
-    return JsonResponse(sign03, safe=False)
+
