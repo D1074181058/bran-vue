@@ -10,27 +10,30 @@
     <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
 </head>
 <body style="background-color:PapayaWhip">
-<div >
-    <div class="_left">
+<div class="_log" style="background-color:White;">
+
+    <div style="margin-top:5%;">
     <span style="vertical-align:middle">
         <a href="/">
-        <img  src="{% static "images/招牌.png" %}"  />
+        <img  style="width:30%;
+    height:100%;margin-left:30%;margin-right:40%;margin-top:5%;" src="{% static "images/招牌.png" %}"  />
         </a>
     </span>
     </div>
-<form action="/login/" method="POST" name="form1">
+<div style="margin-top:10%;margin-bottom:5%;margin-left:auto;margin-right:auto;">
+     <form action="/login/" method="POST" name="form1">
       {% csrf_token %}
       {% if log == 'login' %}
         <div><a href="/logout">登出</a></div>
       {% else %}
-      <table >
+        <table >
           <tr>
               <th>帳號</th><td>{{ inform.account }}</td>
           </tr>
           <tr>
               <th>密碼</th><td>{{ inform.password }}</td>
           </tr>
-          <tr>
+          <tr class="cap">
               <th>驗證碼</th><td>{{ inform.captcha }}</td>
           </tr>
 
@@ -40,8 +43,10 @@
               <input type="reset" name="button2" id="button2" value="重設">
           </div>
       {% endif %}
-  </form>
+      </form>
+</div>
 
+</div>
 <span style="color: red">{{ message }}</span>
 </body>
 </html>
