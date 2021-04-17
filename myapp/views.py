@@ -120,7 +120,7 @@ def logout(request):
         del request.session['account']
         inform = form.loginform()
 
-    return render(request, "login.html", locals())
+    return render(request, "home.html", locals())
 
 def hlogout(request):
     inform = form.loginform(request.POST)
