@@ -31,10 +31,19 @@ urlpatterns = [
     url(r'^agaricus/',views.agarigus),
     url(r'^vegetables/',views.vegetables),
 
+    url(r'^newinfo/',views.newinfo),
+    url(r'^newinfoindex/(\d+)/$',views.newinfo),
+    url(r'^infodetail/(\d+)/$',views.infodetail),
+
+
     url(r'^signup/',views.signup),
     url(r'^login/',views.login),
     url(r'^captcha/',include('captcha.urls')),
     url(r'^logout/',views.logout),
+
+
+
+    url(r'^0',views.test),
 
     #url(r'^login1/$',views.login1),
     #url(r'^login2/$',views.login2),

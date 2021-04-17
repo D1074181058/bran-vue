@@ -4,14 +4,19 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render,redirect
 from datetime import datetime
-from myapp.models import member
+from myapp.models import member,NewsUnit
 from myapp import form
+import math
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
 def sayhello(request):
     return HttpResponse("Django")
+def test(request):
+    now=datetime.now()
+    return render(request,"test.html",locals())
+
 
 def home(request):
     if 'account' in request.session:
@@ -127,8 +132,43 @@ def hlogout(request):
     return render(request, "login.html", locals())
 
 
+page1 = 1
+def newinfo(request,pageindex=None):
+    global page1
+    pagesize = 8
+    newsall = NewsUnit.objects.all().order_by('-id')
+    datasize = len(newsall)
+    totpage = math.ceil(datasize/pagesize)
+    if pageindex == None:
+        page1 = 1
+        newsunits = NewsUnit.objects.filter(enabled=True).order_by('-id')[:pagesize]
+    elif pageindex=='1':
+        start = (page1-2)*pagesize
+        if start >= 0:
+            newsunits = NewsUnit.objects.filter(enabled=True).order_by('-id')[start:(start+pagesize)]
+            page1 -= 1
+    elif pageindex=='2':
+        start = page1*pagesize
+        if start < datasize:
+            newsunits = NewsUnit.objects.filter(enabled=True).order_by('-id')[start:(start+pagesize)]
+            page1 += 1
+    elif pageindex=='3':
+        start = (page1-1)*pagesize
+        newsunits = NewsUnit.objects.filter(enabled=True).order_by('-id')[start:(start+pagesize)]
+    currentpage = page1
+    return render(request, "newinfo.html", locals())
 
-
+def infodetail(request, detailid=None):
+    now = datetime.now()
+    newsunits = NewsUnit.objects.get(id=detailid)
+    category = newsunits.catego
+    title = newsunits.title
+    pubtime = newsunits.pubtime
+    nickname = newsunits.nickname
+    message = newsunits.message
+    newsunits.press += 1
+    newsunits.save()
+    return render(request, "infodetail.html", locals())
 
 
 

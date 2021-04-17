@@ -197,6 +197,9 @@ float:left;
 width:100%;
 height:15%;
 }
+._left a{
+    text-decoration:none;
+}
 ._left a img {
     width:30%;
     height:100%;

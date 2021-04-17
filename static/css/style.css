@@ -177,9 +177,12 @@ width:100%;
 height:15%;
 
 }
+._left a{
+    text-decoration:none;
+}
 ._left a img {
     width:30%;
-    height:100%;
+    height:90%;
     margin-right: 10%;
 }
 table{
@@ -187,7 +190,7 @@ margin-left:auto;
 margin-right:auto;
 }
 .center{
-margin-left: 32%;
+margin-left: 35%;
 
 }
 

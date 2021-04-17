@@ -1,118 +1,52 @@
-<html>
-<head>
-<title>First </title>
+{% extends "dish_base.html" %}
 {% load static %}
-    <link href="{% static "css/style2.css" %}" rel="stylesheet" type="text/css" />
-</head>
-<body style="background-color:PapayaWhip">
-<div style="text-align:right">
-    {% if log == 'login' %}
-     {{ message }}
-    <a>/</a>
-    <a href="/logout">登出</a>
-    {% else %}
-    <a href="/login">登入</a>
-    <a>/</a>
-    <a href="/signup">註冊</a>
-    {% endif %}
-</div>
-<div>
-<div class="_left">
-    <span style="vertical-align:middle">
-    <a href="/">
-        <img  src="{% static "images/招牌.png" %}"  />
-    </a>
-    </span>
-     <ul class="drop-down-menu" >
-        <li><a href="#">品牌</a>
-        </li>
-        <li><a href="#">最新消息</a>
-        </li>
-        <li><a href="#">菜色種類</a>
-            <ul>
-                <li><a href="/beef">牛肉</a>
-                </li>
-                <li><a href="/pig">豬肉</a>
-                </li>
-                <li><a href="/chicken">雞肉</a>
-                </li>
-                <li><a href="/lamb">羊肉</a>
-                </li>
-                <li><a href="/seafood">海鮮</a>
-                </li>
-                <li><a href="/vegetables">蔬菜</a>
-                </li>
-                <li><a href="/agaricus">菇類</a>
-                </li>
-            </ul>
-        </li>
-        <li><a href="#">關於我們</a>
-        </li>
-     </ul>
-</div>
-</div>
-<br />
-
-     <ul class="drop-down-menu2" >
-        <div style="text-align:center" class="nav-title">菜色種類</div>
-       <li><a href="/beef">牛肉</a>
-         </li>
-         <li><a href="/pig">豬肉</a>
-         </li>
-         <li><a href="/chicken">雞肉</a>
-         </li>
-         <li><a href="/lamb">羊肉</a>
-         </li>
-         <li><a href="/seafood">海鮮</a>
-         </li>
-         <li><a href="/vegetables">蔬菜</a>
-         </li>
-         <li><a href="/agaricus">菇類</a>
-         </li>
- </ul>
-
-
-<div class="item" >
+{% block content %}
     <div>
     <img  src="{% static "images/菇/香菇.jpg"  %}"  />
       </br>
         香菇串
       <div>
-       <table >
-           <td>
-               <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-               </select>
+       <table  width="220">
+           <td width="25">
+               <font>數量</font><input style="width:60%" type="number" oninput="if(value>99)value=99;if(value<1)value=1" id='ex-1' placeholder="1-99">
            </td>
-           <td >
-               $30
+           <td width="15">
+               $<font id="ex-1-1"></font>元
            </td>
        </table>
       </div>
     </div>
 
     <div>
-    <img  src="{% static "images/菇/杏鮑菇.jpg"  %}"  />
+    <img  src="{% static "images/菇/杏鮑菇.jpg"  %}" />
       </br>
         烤杏鮑菇
       <div >
-       <table >
-           <td>
-               <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-               </select>
+       <table  width="220">
+           <td width="25">
+               <font>數量</font><input style="width:60%" type="number" oninput="if(value>99)value=99" id='ex-2' placeholder="1-99">
            </td>
-           <td >
-               $35
+           <td width="15">
+               $<font id="ex-2-1"></font>元
            </td>
        </table>
       </div>
     </div>
+    <script>
+        document.getElementById('ex-1').onchange = function(){
+  var ex1 = 35;
 
-</div>
-     </body>
-</html>
+  var ex1Num = parseInt(document.getElementById('ex-1').value);
+  var total= ex1 * ex1Num
+  document.getElementById('ex-1-1').textContent = total;
+  }
+  document.getElementById('ex-2').onchange = function(){
+  var ex2 = 31;
+
+  var ex2Num = parseInt(document.getElementById('ex-2').value);
+  var total= ex2 * ex2Num
+  document.getElementById('ex-2-1').textContent = total;
+  }
+    </script>
+
+{% endblock %}
