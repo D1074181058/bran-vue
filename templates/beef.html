@@ -6,16 +6,12 @@
       </br>
         牛肉串
       <div>
-       <table >
-           <td>
-               <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-               </select>
+       <table  width="220">
+           <td width="25">
+               <font>數量</font><input style="width:60%" type="number" oninput="if(value>99)value=99;if(value<0)value=0" id='ex-1' placeholder="1-99">
            </td>
-           <td >
-               $30
+           <td width="15">
+               $<font id="ex-1-1"></font>元
            </td>
        </table>
       </div>
@@ -26,19 +22,40 @@
       </br>
         牛排
       <div >
-       <table >
-           <td>
-               <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-               </select>
+       <table  width="220">
+           <td width="25">
+               <font>數量</font><input style="width:60%" type="number" oninput="if(value>99)value=99;if(value<0)value=0" id='ex-2' placeholder="1-99">
            </td>
-           <td >
-               $31
+           <td width="15">
+               $<font id="ex-2-1"></font>元
            </td>
        </table>
       </div>
     </div>
+ <script>
+        document.getElementById('ex-1').onchange = function(){
+  var ex1 = 50;
 
+  var ex1Num = parseInt(document.getElementById('ex-1').value);
+
+  var total= ex1 * ex1Num
+
+            if(ex1Num<1||!ex1Num){
+            var total= 0;
+            }else {var total = ex1 * ex1Num;}
+  document.getElementById('ex-1-1').textContent = total;
+  }
+
+  document.getElementById('ex-2').onchange = function(){
+  var ex2 = 70;
+
+  var ex2Num = parseInt(document.getElementById('ex-2').value);
+  if(ex2Num<1||!ex2Num){
+      var total= 0;
+  }else {
+      var total = ex2 * ex2Num;
+  }
+  document.getElementById('ex-2-1').textContent = total;
+  }
+    </script>
 {% endblock %}
