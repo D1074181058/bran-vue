@@ -1,3 +1,4 @@
+
 .info{
     color: #ff0000;
     fomt-size:1.5em;
@@ -6,9 +7,6 @@ ul { /* 取消ul預設的內縮及樣式 */
         margin: 0;
         padding: 0;
         list-style: none;
-
-
-
     }
 
     ul.drop-down-menu {
@@ -16,6 +14,7 @@ ul { /* 取消ul預設的內縮及樣式 */
         display: inline-block;
         font-family: 'Open Sans', Arial, sans-serif;
         font-size: 13px;
+
     }
 
     ul.drop-down-menu li {
@@ -56,7 +55,8 @@ ul { /* 取消ul預設的內縮及樣式 */
         z-index: 99;
         left: -1px;
         top: 100%;
-       min-width: 180px;
+         min-width: 180px;
+
     }
 
     ul.drop-down-menu ul li {
@@ -78,6 +78,7 @@ ul { /* 取消ul預設的內縮及樣式 */
 
     ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
         display: block;
+
     }
 
 
@@ -87,7 +88,7 @@ ul { /* 取消ul預設的內縮及樣式 */
     margin:0 auto;
     margin-top: 5%;
     width:90%;
-    height:80%;
+    height:100%;
 
     position: relative;
 
@@ -182,7 +183,7 @@ height:15%;
 }
 ._left a img {
     width:30%;
-    height:90%;
+    height:100%;
     margin-right: 10%;
 }
 table{
@@ -213,7 +214,19 @@ margin-top:10%;
  height:100%;
      padding: 1.25rem;
 }
+#footer {
+	font-size: 12px;
+	padding: 15px 10px;
+	clear: both;
 
+	margin-bottom: 20px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	text-shadow: 1px 1px 1px #CCC;
+	text-align: center;
+}
 
 
 

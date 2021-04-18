@@ -132,7 +132,7 @@ text-align:center
         border-bottom: none;
     }
 
-    ul.drop-down-menu ul ul { /*第三層以後的選單出現位置與第二層不同*/
+    ul.drop-down-menu2 ul ul { /*第三層以後的選單出現位置與第二層不同*/
         z-index: 999;
         top: 10px;
         left: 90%;
@@ -218,12 +218,13 @@ input[type="number"] {
 }
 
 input[type="submit"] {
+    margin-top: 5%;
     padding:15px 15px;
     border:1px black solid;
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    width:10%;
+    width:8%;
     height:5%;
 
 }
@@ -232,4 +233,16 @@ input[type="submit"] {
       background-color:red;
      -webkit-transition:color 3s;
 }
+#footer {
+	font-size: 12px;
+	padding: 15px 10px;
+	clear: both;
 
+	margin-bottom: 20px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	text-shadow: 1px 1px 1px #CCC;
+	text-align: center;
+}
