@@ -207,5 +207,29 @@ height:15%;
 }
 
 
+input[type="number"] {
+    padding:5px 5px;
+    border:1px black solid;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width:60%;
+    height:100%;
+}
 
+input[type="submit"] {
+    padding:15px 15px;
+    border:1px black solid;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width:10%;
+    height:5%;
+
+}
+
+#button:hover{
+      background-color:red;
+     -webkit-transition:color 3s;
+}
 
