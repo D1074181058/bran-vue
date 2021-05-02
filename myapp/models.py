@@ -10,10 +10,10 @@ class member(models.Model):
     email = models.EmailField(max_length=100, null=False)
     date = models.CharField(max_length=20, null=True,blank=True,default='')
     phone = models.CharField(max_length=10, null=True,blank=True,default='')
-    address = models.CharField(max_length=50, null=True,blank=True,default='')
+    address = models.CharField(max_length=49, null=True,blank=True,default='')
 
     def __str__(self):
-       return self.Name
+       return self.account
 
 class NewsUnit(models.Model):
     catego = models.CharField(max_length=10, null=False)
@@ -26,6 +26,21 @@ class NewsUnit(models.Model):
 
     def __str__(self):
         return self.title
+
+class Order(models.Model):
+    customname = models.CharField(max_length=20)
+    customemail = models.CharField(max_length=60, default='',null=True)
+    customphone=models.CharField(max_length=15,default='',null=True)
+    customaddress = models.CharField(max_length=100, default='',null=True)
+    unitname = models.CharField(max_length=100,default='')
+    unitnum=models.IntegerField(default=0)
+    unitprice=models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.customname
+
+
+
 
 
 

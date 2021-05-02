@@ -7,11 +7,11 @@
 <div>
     <img  src="{% static "images/羊/羊肉串.jpg"  %}"  />
       </br>
-        羊肉串
+    <font id='sales'> 羊肉串</font>
       <div>
        <table  width="220">
            <td width="25">
-               <font>數量</font><input  type="number" oninput="if(value>99)value=99;if(value<0)value=0" id='ex-1' placeholder="1-99">
+               <font>數量</font><input  type="number"  id='ex-1' onchange="count()" placeholder="1-99">
            </td>
            <td width="15">
                $<font id="ex-1-1"></font>元
@@ -20,17 +20,47 @@
       </div>
     </div>
     <script>
-        document.getElementById('ex-1').onchange = function(){
-  var ex1 = 30;
-
-  var ex1Num = parseInt(document.getElementById('ex-1').value);
-
-  var total= ex1 * ex1Num
-
-            if(ex1Num<1||!ex1Num){
-            var total= 0;
-            }else {var total = ex1 * ex1Num;}
-  document.getElementById('ex-1-1').textContent = total;
+        function count(){
+  var ex_cost = [30];
+  var ex_1 = document.querySelectorAll("#ex-1");
+  var ex_1_1=document.querySelectorAll("#ex-1-1");
+  for (var i=0; i<ex_1.length; ++i) {
+      let num = parseInt(ex_1[i].value)
+       ex_1[i].oninput=function(e){
+              if (e.target.value>99)
+                  e.target.value=99;
+              else if(e.target.value<0)
+                  e.target.value =0;
+          }
+      if(ex_1[i].value !== "" ){
+          var total = ex_cost[i] * num;
+          ex_1_1[i].textContent = total;
+      }else{
+          var total = ex_cost[i] * 0;
+          ex_1_1[i].textContent = total;
+      }
+  }
+  }
+   function my(){
+            var sales = document.querySelectorAll("#sales");
+            var ex_1 = document.querySelectorAll("#ex-1");
+            var ex_1_1 = document.querySelectorAll("#ex-1-1");
+            for (var i=0; i<ex_1.length; ++i) {
+                if(ex_1[i].value !== "" ){
+                    $.ajax({
+                        url: "/beef/",
+                        type: "POST",
+                         data: {
+                            "unitname": sales[i].textContent,
+                             "unitnum": ex_1[i].value,
+                             "unitprice": ex_1_1[i].textContent,
+                             csrfmiddlewaretoken: '{{ csrf_token }}',
+                         },success:function (data){
+                            location.reload();
+                        }
+                    })
+          }
+      }
   }
     </script>
 

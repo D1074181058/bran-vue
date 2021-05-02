@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^newinfo/',views.newinfo),
     url(r'^newinfoindex/(\d+)/$',views.newinfo),
     url(r'^infodetail/(\d+)/$',views.infodetail),
+    url(r'^contactus/',views.contactus),
 
 
     url(r'^signup/',views.signup),

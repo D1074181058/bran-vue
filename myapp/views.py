@@ -4,11 +4,14 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render,redirect
 from datetime import datetime
-from myapp.models import member,NewsUnit
+from myapp.models import member,NewsUnit,Order
 from myapp import form
-import math
+import math,json
+from django.template import RequestContext
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from email.mime.text import MIMEText
+from smtplib import SMTP, SMTPAuthenticationError, SMTPException
 
 
 def sayhello(request):
@@ -21,7 +24,10 @@ def test(request):
 def home(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
         message = request.session['account']+"已登入"
+
+
 
     now=datetime.now()
     return render(request,"home.html",locals())
@@ -29,42 +35,92 @@ def pig(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
+        if request.method == "POST":
+            account = request.session['account']
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
+            unit.save()
     now=datetime.now()
     return render(request,"pig.html",locals())
 def beef(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
+        if request.method == "POST":
+            account = request.session['account']
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
+            unit.save()
+            return render(request, "beef.html", locals())
     now=datetime.now()
     return render(request,"beef.html",locals())
 def chicken(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
+        if request.method == "POST":
+            account = request.session['account']
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
+            unit.save()
     now=datetime.now()
     return render(request,"chicken.html",locals())
 def lamb(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
+        if request.method == "POST":
+            account = request.session['account']
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
+            unit.save()
     now=datetime.now()
     return render(request,"lamb.html",locals())
 def seafood(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
+        if request.method == "POST":
+            account = request.session['account']
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
+            unit.save()
     now=datetime.now()
     return render(request,"seafood.html",locals())
 def agarigus(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
+        if request.method == "POST":
+            account = request.session['account']
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
+            unit.save()
     now=datetime.now()
     return render(request,"agaricus.html",locals())
 def vegetables(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
+        if request.method == "POST":
+            account = request.session['account']
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
+            unit.save()
     now=datetime.now()
     return render(request,"vegetables.html",locals())
 def signup(request):
@@ -172,3 +228,40 @@ def infodetail(request, detailid=None):
 
 
 
+def contactus(request):
+    if request.method =="POST":
+        contactform=form.contactusform(request.POST)
+        if contactform.is_valid():
+            Name  = contactform.cleaned_data['Name']
+            phone = contactform.cleaned_data['phone']
+            title = contactform.cleaned_data['title']
+            content = contactform.cleaned_data['content']
+
+            strSmtp = "smtp.gmail.com:587"
+            strAccount = ""
+            strPassword = ""
+
+            content = "建議人姓名 : " + Name + "\n"+"建議人電話 : " + phone + "\n"+"建議內容   :\n" + content + "\n"
+            msg = MIMEText(content)
+
+            msg["Subject"] = title
+            mailto = ""
+
+            server = SMTP(strSmtp)
+            server.ehlo()
+            server.starttls()
+            try:
+                server.login(strAccount, strPassword)
+                server.sendmail(strAccount, mailto, msg.as_string())
+                hint = "郵件已發送！"
+            except SMTPAuthenticationError:
+                hint = "無法登入！"
+            except:
+                hint = "郵件發送產生錯誤！"
+            server.quit()
+            return redirect('/')
+        else:
+            message='有欄位錯誤'
+    else:
+        contactform = form.contactusform()
+    return render(request , "contactus.html",locals())

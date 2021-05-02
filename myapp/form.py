@@ -16,3 +16,9 @@ class loginform(forms.Form):
     account = forms.CharField(max_length=20, initial='')
     password = forms.CharField(max_length=20, initial='',widget=forms.PasswordInput)
     captcha = CaptchaField()
+
+class contactusform(forms.Form):
+    Name = forms.CharField(max_length=10, initial='',widget=forms.TextInput(attrs={'placeholder': '吳宗翰'}))
+    phone = forms.CharField(max_length=20,initial='',)
+    title = forms.CharField(max_length=50, required=False,initial='')
+    content = forms.CharField(required=False,initial='')

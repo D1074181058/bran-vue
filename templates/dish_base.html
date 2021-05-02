@@ -1,4 +1,4 @@
-<html style="">
+<html>
 <head>
 {% block title %} {% endblock %}
 {% load static %}
@@ -47,7 +47,7 @@
                 </li>
             </ul>
         </li>
-        <li><a href="#">關於我們</a>
+        <li><a href="/contactus">關於我們</a>
         </li>
      </ul>
 </div>
@@ -74,11 +74,13 @@
 
 
 <div class="item" style="overflow-y:scroll" >
+<form  method="POST" name="form_name">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% block content %} {% endblock %}
-
+</form>
 </div>
 <div style="text-align: center;">
-    <input align="center" valign="center" type="submit" name="button" id="button" value="確定">
+    <input align="center" valign="center" onclick="my()" type="submit" name="button" id="button" value="確定">
 </div>
 <div id="footer">
             &copy;Copyright 2021 Pang Ger 胖哥燒烤
