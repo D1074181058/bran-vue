@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>訂單管理</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
+</head>
+
+<body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<table border="0" style="border-spacing:200px;" >
+
+ {% for unit in orderall %}
+            <tr>
+                <td name ="unitname" >{{unit.unitname}}</td>
+                <td name ="unitnum" >{{unit.unitnum}}</td>
+                <td name ="customname" >{{unit.customname}}</td>
+                <td name ="nowtime" >{{unit.nowtime}}</td>
+                <td><input type="button" name="del" onclick="del(this)" value="刪除"></td>
+            <td></td>
+            </tr>
+ {% endfor %}
+</table>
+
+<script>
+    unitnameall=document.querySelectorAll('td[name="unitname"]');
+    unitnumall=document.getElementsByName("unitnum");
+    customnameall=document.getElementsByName("customname");
+    tr_all=document.querySelectorAll('tr')
+    inputall=document.querySelectorAll('input[name="del"]')
+    for(i=0;i<tr_all.length;++i){
+        tr_all[i].id=i+1
+        inputall[i].id=i+1
+    }
+    function del(val){
+        btn_id=val.id
+        tr_id_all=document.querySelectorAll('tr[id="' + btn_id + '"] > td')
+        $.ajax({
+                        url: "/delorder/",
+                        type: "POST",
+                         data: {
+                            "unitname": tr_id_all[0].textContent,
+                             "unitnum": tr_id_all[1].textContent,
+                             "customname": tr_id_all[2].textContent,
+                             "nowtime": tr_id_all[3].textContent,
+                             csrfmiddlewaretoken: '{{ csrf_token }}',
+                         },success:function (data){
+                            location.reload();
+                        }
+                    })
+    }
+
+</script>
+</body>
+
+</html>
+
+
+

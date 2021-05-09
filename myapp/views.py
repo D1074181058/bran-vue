@@ -20,107 +20,95 @@ def test(request):
     now=datetime.now()
     return render(request,"test.html",locals())
 
+def backview(request):
+    i=0
+    lis=[]
+    orderall = Order.objects.all()
+    for order in orderall:
+        i+=1
+        lis.append(i)
+    now = datetime.now()
+    return render(request, "backview.html", locals())
+
+def inserorder(request):
+    now = datetime.now()
+    if 'account' in request.session:
+        if request.method == "POST":
+            account = request.session['account']
+            name = member.objects.get(account=account).Name
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Order.objects.create(customname=name,customaccount=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice,nowtime=now)
+            unit.save()
+    return render(request,"home.html", locals())
+def delorder(request):
+    now = datetime.now()
+    if request.method == "POST":
+        unitname = request.POST.get("unitname")
+        unitnum = request.POST.get("unitnum")
+        name=request.POST.get("customname")
+        nowtime = request.POST.get("nowtime")
+        order=Order.objects.get(customname=name,unitname=unitname,unitnum=unitnum,nowtime=nowtime)
+        order.delete()
+    return render(request, "home.html", locals())
 
 def home(request):
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
         message = request.session['account']+"已登入"
-
-
-
     now=datetime.now()
     return render(request,"home.html",locals())
 def pig(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
-        if request.method == "POST":
-            account = request.session['account']
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
-            unit.save()
+
     now=datetime.now()
     return render(request,"pig.html",locals())
+
 def beef(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
-        if request.method == "POST":
-            account = request.session['account']
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
-            unit.save()
-            return render(request, "beef.html", locals())
+
+
     now=datetime.now()
     return render(request,"beef.html",locals())
 def chicken(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
-        if request.method == "POST":
-            account = request.session['account']
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
-            unit.save()
+
     now=datetime.now()
     return render(request,"chicken.html",locals())
 def lamb(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
-        if request.method == "POST":
-            account = request.session['account']
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
-            unit.save()
+
     now=datetime.now()
     return render(request,"lamb.html",locals())
 def seafood(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
-        if request.method == "POST":
-            account = request.session['account']
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
-            unit.save()
+
     now=datetime.now()
     return render(request,"seafood.html",locals())
 def agarigus(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
-        if request.method == "POST":
-            account = request.session['account']
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
-            unit.save()
+
     now=datetime.now()
     return render(request,"agaricus.html",locals())
 def vegetables(request):
     if 'account' in request.session:
         log = 'login'
         message = request.session['account']+"已登入"
-        if request.method == "POST":
-            account = request.session['account']
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create( customname=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice)
-            unit.save()
+
     now=datetime.now()
     return render(request,"vegetables.html",locals())
 def signup(request):
@@ -190,6 +178,10 @@ def hlogout(request):
 
 page1 = 1
 def newinfo(request,pageindex=None):
+    if 'account' in request.session:
+        log = 'login'
+        account = request.session['account']
+        message = request.session['account']+"已登入"
     global page1
     pagesize = 8
     newsall = NewsUnit.objects.all().order_by('-id')
@@ -215,6 +207,10 @@ def newinfo(request,pageindex=None):
     return render(request, "newinfo.html", locals())
 
 def infodetail(request, detailid=None):
+    if 'account' in request.session:
+        log = 'login'
+        account = request.session['account']
+        message = request.session['account']+"已登入"
     now = datetime.now()
     newsunits = NewsUnit.objects.get(id=detailid)
     category = newsunits.catego
@@ -229,6 +225,10 @@ def infodetail(request, detailid=None):
 
 
 def contactus(request):
+    if 'account' in request.session:
+        log = 'login'
+        account = request.session['account']
+        message = request.session['account']+"已登入"
     if request.method =="POST":
         contactform=form.contactusform(request.POST)
         if contactform.is_valid():

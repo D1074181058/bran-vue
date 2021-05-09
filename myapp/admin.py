@@ -14,6 +14,6 @@ class NewsUnitAdmin(admin.ModelAdmin):
 admin.site.register(NewsUnit,NewsUnitAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
-     list_display=('customname', 'customemail', 'customphone', 'customaddress', 'unitname','unitnum','unitprice')
+     list_display=('customname','customaccount','customemail', 'customphone', 'customaddress', 'unitname','unitnum','unitprice','nowtime')
      ordering = ('id',)
 admin.site.register(Order,OrderAdmin)

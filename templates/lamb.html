@@ -20,18 +20,20 @@
       </div>
     </div>
     <script>
-        function count(){
-  var ex_cost = [30];
+    var ex_cost = [30];
   var ex_1 = document.querySelectorAll("#ex-1");
   var ex_1_1=document.querySelectorAll("#ex-1-1");
+    for (var i=0; i<ex_1.length; ++i) {
+        ex_1[i].oninput = function (e) {
+            if (e.target.value > 99)
+                e.target.value = 99;
+            else if (e.target.value < 0)
+                e.target.value = 0;
+        }
+    }
+        function count(){
   for (var i=0; i<ex_1.length; ++i) {
       let num = parseInt(ex_1[i].value)
-       ex_1[i].oninput=function(e){
-              if (e.target.value>99)
-                  e.target.value=99;
-              else if(e.target.value<0)
-                  e.target.value =0;
-          }
       if(ex_1[i].value !== "" ){
           var total = ex_cost[i] * num;
           ex_1_1[i].textContent = total;
@@ -48,7 +50,7 @@
             for (var i=0; i<ex_1.length; ++i) {
                 if(ex_1[i].value !== "" ){
                     $.ajax({
-                        url: "/beef/",
+                        url: "/inserorder/",
                         type: "POST",
                          data: {
                             "unitname": sales[i].textContent,

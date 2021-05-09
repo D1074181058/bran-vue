@@ -29,13 +29,14 @@ class NewsUnit(models.Model):
 
 class Order(models.Model):
     customname = models.CharField(max_length=20)
-    customemail = models.CharField(max_length=60, default='',null=True)
+    customaccount = models.CharField(max_length=20)
+    customemail = models.EmailField(max_length=60, default='',null=True)
     customphone=models.CharField(max_length=15,default='',null=True)
     customaddress = models.CharField(max_length=100, default='',null=True)
     unitname = models.CharField(max_length=100,default='')
     unitnum=models.IntegerField(default=0)
     unitprice=models.IntegerField(default=0)
-
+    nowtime = models.CharField(max_length=50)
     def __str__(self):
         return self.customname
 
