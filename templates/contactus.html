@@ -58,7 +58,7 @@
 </div>
 <div style="weight:100%;height:100%">
 <div class="contactus-all" style="padding:20px 20px 20px 20px;background-color:NavajoWhite;">
-    <p>聯絡資訊</p>
+    <p style="text-align:center;font-size:200%;"><b>聯絡資訊</b></p>
      <div class="contactus-lab" style="background-color:NavajoWhite;">
         <table >
                 <tr>
@@ -88,24 +88,41 @@
     <div class="contact-1" style="background-color:NavajoWhite;">
         <form action="." method="POST" name="form1">
             {% csrf_token %}
+             <div class="contact-content" style="text-align:right;">
+              <div>
+                    姓名
+              </div>
+                <div>
+                    連絡電話
+                </div>
+              <div>
+                    主旨
+              </div>
 
-            <table align="center">
-                <tr>
-                    <th>姓名</th><td>{{ contactform.Name }}</td>
-                </tr>
-                <tr>
-                    <th>連絡電話</th><td>{{ contactform.phone }}</td>
-                </tr>
-                <tr>
-                    <th>主旨</th><td>{{ contactform.title }}</td>
-                </tr>
-            </table>
-            <div class="contact-content" >
-                <b style="color:black;font-size:25px;padding:0px 20px 0px 150px">建議內容 {{ contactform.content }}</b>
+            <div>
+                <b >建議內容 </b>
             </div>
 
+             </div>
 
-            <div style="margin-top:8%;margin-bottom:5%;margin-left:45%;">
+
+            <div class="contact-text">
+            <div  >
+                    {{ contactform.Name }}
+              </div>
+                <div>
+                    {{ contactform.phone }}
+                </div>
+              <div  >
+                   {{ contactform.title }}
+              </div>
+
+            <div>
+                {{ contactform.content }}
+            </div>
+          </div>
+<br>
+            <div style="margin-left:20%;margin-top:35%;text-align:center;width:90%;" >
               <input type="submit" name="button" id="button" value="送出">
             </div>
 
