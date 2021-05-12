@@ -39,6 +39,15 @@ class Order(models.Model):
     nowtime = models.CharField(max_length=50)
     def __str__(self):
         return self.customname
+class Orderview(models.Model):
+    customname = models.CharField(max_length=20)
+    customaccount = models.CharField(max_length=20)
+    salename = models.CharField(max_length=20)
+    salenum = models.IntegerField(default=0)
+    saleprice = models.IntegerField(default=0)
+    def __str__(self):
+        return self.customname
+
 
 
 

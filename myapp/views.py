@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render,redirect
 from datetime import datetime
-from myapp.models import member,NewsUnit,Order
+from myapp.models import member,NewsUnit,Order,Orderview
 from myapp import form
 import math,json
 from django.template import RequestContext
@@ -29,9 +29,15 @@ def backview(request):
         lis.append(i)
     now = datetime.now()
     return render(request, "backview.html", locals())
+def sal_view(request):
+    orderviewall = Orderview.objects.all()
+
+    now = datetime.now()
+    return render(request, "sal_view.html", locals())
+
 
 def inserorder(request):
-    now = datetime.now()
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     if 'account' in request.session:
         if request.method == "POST":
             account = request.session['account']
@@ -41,7 +47,30 @@ def inserorder(request):
             unitprice = request.POST.get("unitprice")
             unit = Order.objects.create(customname=name,customaccount=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice,nowtime=now)
             unit.save()
+            ID = request.POST.get("view_id")
+            orderview_all = Orderview.objects.get(id=ID)
+            orderview_all.delete()
     return render(request,"home.html", locals())
+def inserorderview(request):
+    if 'account' in request.session:
+        if request.method == "POST":
+            account = request.session['account']
+            name = member.objects.get(account=account).Name
+            unitname = request.POST.get("unitname")
+            unitnum = request.POST.get("unitnum")
+            unitprice = request.POST.get("unitprice")
+            unit = Orderview.objects.create(customname=name,customaccount=account,salename=unitname, salenum=unitnum, saleprice=unitprice)
+            unit.save()
+
+    return render(request,"home.html", locals())
+def delorderview(request):
+    if request.method == "POST":
+        ID=request.POST.get("view_id")
+        orderview=Orderview.objects.get(id=ID)
+        orderview.delete()
+    return render(request, "home.html", locals())
+
+
 def delorder(request):
     now = datetime.now()
     if request.method == "POST":

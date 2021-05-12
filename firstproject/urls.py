@@ -47,8 +47,11 @@ urlpatterns = [
 
 
     url(r'^backview/',views.backview),
+    url(r'^sal_view/',views.sal_view),
     url(r'^inserorder/', views.inserorder),
+    url(r'^inserorderview/', views.inserorderview),
     url(r'^delorder/', views.delorder),
+    url(r'^delorderview/', views.delorderview),
 
 
 

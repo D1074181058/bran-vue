@@ -1,5 +1,5 @@
 from django.contrib import admin
-from myapp.models  import member,NewsUnit,Order
+from myapp.models  import member,NewsUnit,Order,Orderview
 
 
 # Register your models here.
@@ -17,3 +17,8 @@ class OrderAdmin(admin.ModelAdmin):
      list_display=('customname','customaccount','customemail', 'customphone', 'customaddress', 'unitname','unitnum','unitprice','nowtime')
      ordering = ('id',)
 admin.site.register(Order,OrderAdmin)
+
+class OrderviewAdmin(admin.ModelAdmin):
+     list_display=('customname','customaccount', 'salename','salenum','saleprice')
+     ordering = ('id',)
+admin.site.register(Orderview,OrderviewAdmin)

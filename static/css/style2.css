@@ -246,3 +246,10 @@ input[type="submit"] {
 	text-shadow: 1px 1px 1px #CCC;
 	text-align: center;
 }
+input[name='del'] {
+    padding:15px 15px;
+    border:1px black solid;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
