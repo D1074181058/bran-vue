@@ -259,7 +259,7 @@ def contactus(request):
             except:
                 hint = "郵件發送產生錯誤！"
             server.quit()
-            return redirect('/')
+
         else:
             message='有欄位錯誤'
     else:
