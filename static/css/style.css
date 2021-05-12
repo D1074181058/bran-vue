@@ -274,3 +274,8 @@ float:left;
 
 }
 
+.tb-td td{
+    border:1px solid black;
+    background-color:white;
+}
+

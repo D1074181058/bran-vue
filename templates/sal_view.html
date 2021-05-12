@@ -6,19 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% load static %}
-    <link href="{% static "css/style2.css" %}" rel="stylesheet" type="text/css" />
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
     <title>購物車</title>
 </head>
 <body>
-<div style="width:100%;height:100%">
-<table border="0" style="border-spacing:30px;margin-right:auto;margin-left:auto;border-spacing:50px;"  >
-           <tr name="list">
+
+<table border="1" style="padding:10px; background-color:#eee;"  >
+           <tr class="tb-td" name="list">
                 <td name ="salename" >商品名稱</td>
                 <td name ="salenum" >商品數量</td>
                 <td name ="saleprice" >商品價格</td>
             </tr>
  {% for unit in orderviewall %}
-            <tr name="list">
+            <tr class="tb-td" name="list">
                 <td id="{{unit.id}}" name ="salename" >{{unit.salename}}</td>
                 <td name ="salenum" >{{unit.salenum}}</td>
                 <td name ="saleprice" >{{unit.saleprice}}</td>
@@ -26,7 +26,7 @@
             </tr>
  {% endfor %}
 </table>
-</div>
+
 <div style="text-align:center;margin-top:10%">
     <input align="center" valign="center" onclick="inserorder()" type="submit" name="button" id="button" value="確定">
 </div>
@@ -35,7 +35,7 @@
     tr_all=document.querySelectorAll('tr')
     inputall=document.querySelectorAll('input[name="del"]')
     for(i=0;i<tr_all.length;++i){
-        tr_all[i].id=i+1
+        tr_all[i].id=i
         inputall[i].id=i+1
     }
     function del(val){
