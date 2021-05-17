@@ -65,7 +65,12 @@ def inserorderview(request):
             unitname = request.POST.get("unitname")
             unitnum = request.POST.get("unitnum")
             unitprice = request.POST.get("unitprice")
-            unit = Orderview.objects.create(customname=name,customaccount=account,salename=unitname, salenum=unitnum, saleprice=unitprice)
+            try:
+                unit=Orderview.objects.get(customaccount=account,salename=unitname)
+                unit.salenum = int(unit.salenum)+int(unitnum)
+                unit.saleprice = int(unit.saleprice)+int(unitprice)
+            except Orderview.DoesNotExist:
+                unit = Orderview.objects.create(customname=name,customaccount=account,salename=unitname, salenum=unitnum, saleprice=unitprice)
             unit.save()
     else:
         result = "Error"
