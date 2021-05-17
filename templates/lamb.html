@@ -59,14 +59,8 @@
                              csrfmiddlewaretoken: '{{ csrf_token }}',
                          },success:function (data){
                             data = JSON.parse(data);
+                                location.reload();
 
-                            if (data["result"] != "True") {
-                                alert("請先登入")
-                                location.reload();
-                            }
-                            else{
-                                location.reload();
-                            }
                         }
                     })
           }

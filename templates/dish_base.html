@@ -84,7 +84,12 @@
 </form>
 </div>
 <div style="text-align: center;">
+    {% if log == 'login' %}
     <input align="center" valign="center" onclick="my()" type="submit" name="button" id="button" value="確定">
+    {% else %}
+    <font >尚未登入 還無法購買</font>
+    {% endif %}
+
     {% if viewlen %}
     <input align="center" valign="center"  onclick="self.location.href='/sal_view'" type="submit" name="button" id="button" value="購物車({{ viewlen }})">
     {% endif %}
