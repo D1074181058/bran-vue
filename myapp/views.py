@@ -30,8 +30,11 @@ def backview(request):
     now = datetime.now()
     return render(request, "backview.html", locals())
 def sal_view(request):
-    orderviewall = Orderview.objects.all()
-
+    if 'account' in request.session:
+        log='login'
+        account = request.session['account']
+        message = account + "已登入"
+        orderviewall = Orderview.objects.filter(customaccount=account)
     now = datetime.now()
     return render(request, "sal_view.html", locals())
 
@@ -53,6 +56,7 @@ def inserorder(request):
     return render(request,"home.html", locals())
 def inserorderview(request):
     if 'account' in request.session:
+        result = "True"
         if request.method == "POST":
             account = request.session['account']
             name = member.objects.get(account=account).Name
@@ -61,8 +65,10 @@ def inserorderview(request):
             unitprice = request.POST.get("unitprice")
             unit = Orderview.objects.create(customname=name,customaccount=account,salename=unitname, salenum=unitnum, saleprice=unitprice)
             unit.save()
+    else:
+        result = "Error"
+    return HttpResponse(json.dumps({"result": result}))
 
-    return render(request,"home.html", locals())
 def delorderview(request):
     if request.method == "POST":
         ID=request.POST.get("view_id")
@@ -92,6 +98,12 @@ def home(request):
 def pig(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
+        try:
+            orderview = Orderview.objects.filter(customaccount=account)
+            viewlen = len(orderview)
+        except Orderview.DoesNotExist:
+            viewlen = ""
         message = request.session['account']+"已登入"
 
     now=datetime.now()
@@ -100,6 +112,13 @@ def pig(request):
 def beef(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
+        try:
+            orderview = Orderview.objects.filter(customaccount=account)
+            viewlen = len(orderview)
+        except Orderview.DoesNotExist:
+            viewlen=""
+
         message = request.session['account']+"已登入"
 
 
@@ -108,6 +127,12 @@ def beef(request):
 def chicken(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
+        try:
+            orderview = Orderview.objects.filter(customaccount=account)
+            viewlen = len(orderview)
+        except Orderview.DoesNotExist:
+            viewlen = ""
         message = request.session['account']+"已登入"
 
     now=datetime.now()
@@ -115,6 +140,12 @@ def chicken(request):
 def lamb(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
+        try:
+            orderview = Orderview.objects.filter(customaccount=account)
+            viewlen = len(orderview)
+        except Orderview.DoesNotExist:
+            viewlen = ""
         message = request.session['account']+"已登入"
 
     now=datetime.now()
@@ -122,6 +153,12 @@ def lamb(request):
 def seafood(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
+        try:
+            orderview = Orderview.objects.filter(customaccount=account)
+            viewlen = len(orderview)
+        except Orderview.DoesNotExist:
+            viewlen = ""
         message = request.session['account']+"已登入"
 
     now=datetime.now()
@@ -129,6 +166,12 @@ def seafood(request):
 def agarigus(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
+        try:
+            orderview = Orderview.objects.filter(customaccount=account)
+            viewlen = len(orderview)
+        except Orderview.DoesNotExist:
+            viewlen = ""
         message = request.session['account']+"已登入"
 
     now=datetime.now()
@@ -136,6 +179,12 @@ def agarigus(request):
 def vegetables(request):
     if 'account' in request.session:
         log = 'login'
+        account = request.session['account']
+        try:
+            orderview = Orderview.objects.filter(customaccount=account)
+            viewlen = len(orderview)
+        except Orderview.DoesNotExist:
+            viewlen = ""
         message = request.session['account']+"已登入"
 
     now=datetime.now()
@@ -294,3 +343,9 @@ def contactus(request):
     else:
         contactform = form.contactusform()
     return render(request , "contactus.html",locals())
+def aboutus(request):
+    if 'account' in request.session:
+        log = 'login'
+        message = request.session['account']+"已登入"
+    now=datetime.now()
+    return render(request,"aboutus.html",locals())

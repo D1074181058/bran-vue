@@ -9,8 +9,30 @@
     <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
     <title>購物車</title>
 </head>
-<body>
+<body style="background-color:PapayaWhip">
+<div style="text-align:right">
+    {% if log == 'login' %}
+     {{ message }}
+    <a>/</a>
+    <a href="/logout">登出</a>
+    {% else %}
+    <a href="/login">登入</a>
+    <a>/</a>
+    <a href="/signup">註冊</a>
+    {% endif %}
+</div>
+<div>
+<div class="_left">
+    <span style="vertical-align:middle">
+    <a href="/">
+        <img  src="{% static "images/招牌.png" %}" />
+    </a>
+    </span>
+    <font size="40"> {{account}} 的購物車 </font>
 
+
+</div>
+{% if orderviewall %}
 <table border="1" style="padding:10px; background-color:#eee;"  >
            <tr class="tb-td" name="list">
                 <td name ="salename" >商品名稱</td>
@@ -25,19 +47,37 @@
                 <td><input type="button" name="del" onclick="del(this)" value="刪除"></td>
             </tr>
  {% endfor %}
+            <tr class="tb-td" name="list">
+               <td> 總價</td>
+                <td></td>
+             </tr>
 </table>
-
-<div style="text-align:center;margin-top:10%">
+    <div style="text-align:center;margin-top:10%">
     <input align="center" valign="center" onclick="inserorder()" type="submit" name="button" id="button" value="確定">
 </div>
+    {% else %}
+    <div style="text-align:center">
+    <font >尚無資料</font>
+    </div>
+{% endif %}
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     tr_all=document.querySelectorAll('tr')
     inputall=document.querySelectorAll('input[name="del"]')
+    var totalprice=0
+    var n =0
     for(i=0;i<tr_all.length;++i){
-        tr_all[i].id=i
-        inputall[i].id=i+1
+     tr_all[i].id=i
     }
+    for(i=0;i<inputall.length;++i){
+        inputall[i].id=i+1
+        tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
+        totalprice += parseInt(tr_id_all[2].textContent)
+    }
+    tr_id_all = document.querySelectorAll('tr[id="' + (inputall.length+1) + '"] > td')
+    tr_id_all[1].textContent=totalprice
     function del(val){
         btn_id=val.id
         tr_id_all=document.querySelectorAll('tr[id="' + btn_id + '"] > td')
@@ -69,9 +109,6 @@
                             location.reload();
                         }
                     })
-
-
-
                     }
     }
 

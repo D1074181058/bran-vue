@@ -1,15 +1,10 @@
-html{
-    -webkit-text-size-adjust:none;
-text-size-adjust: none;
-}
-.info{
-    color: #ff0000;
-    fomt-size:1.5em;
-}
 ul { /* 取消ul預設的內縮及樣式 */
         margin: 0;
         padding: 0;
         list-style: none;
+
+
+
     }
 
     ul.drop-down-menu {
@@ -17,7 +12,6 @@ ul { /* 取消ul預設的內縮及樣式 */
         display: inline-block;
         font-family: 'Open Sans', Arial, sans-serif;
         font-size: 13px;
-
     }
 
     ul.drop-down-menu li {
@@ -58,8 +52,7 @@ ul { /* 取消ul預設的內縮及樣式 */
         z-index: 99;
         left: -1px;
         top: 100%;
-         min-width: 180px;
-
+       min-width: 180px;
     }
 
     ul.drop-down-menu ul li {
@@ -81,7 +74,6 @@ ul { /* 取消ul預設的內縮及樣式 */
 
     ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
         display: block;
-
     }
 
 
@@ -90,8 +82,8 @@ ul { /* 取消ul預設的內縮及樣式 */
 
     margin:0 auto;
     margin-top: 5%;
-    width:90%;
-    height:100%;
+    width:70%;
+    height:60%;
 
     position: relative;
 
@@ -110,53 +102,62 @@ ul { /* 取消ul預設的內縮及樣式 */
 }
 
 .img_ex div {
-    -webkit-animation: round 10s linear infinite;
-            animation: round 10s linear infinite;
+    -webkit-animation: round 16s linear infinite;
+            animation: round 16s linear infinite;
 }
 
 @-webkit-keyframes round {
-    10% {
+    6.25% {
         opacity: 1;
         filter: alpha(opacity=100);
         /* 0 - 1秒 淡入*/
     }
-    50% {
+    18.75% {
         opacity: 1;
         filter: alpha(opacity=100);
         /* 1- 5秒靜止*/
     }
-    55% {
+    25% {
         opacity: 0;
         filter: alpha(opacity=0);
         /* 5-6秒淡出*/
     }
 }
 @keyframes round {
-    10% {
+    6.25% {
         opacity: 1;
         filter: alpha(opacity=100);
         /* 0 - 1秒 淡入*/
     }
-    50% {
+    18.75% {
         opacity: 1;
         filter: alpha(opacity=100);
         /* 1- 5秒靜止*/
     }
-    55% {
+    25% {
         opacity: 0;
         filter: alpha(opacity=0);
         /* 5-6秒淡出*/
     }
 }
 
-.img_ex div:nth-child(2) {
+.img_ex div:nth-child(4) {
     -webkit-animation-delay: 0s;
             animation-delay: 0s;
 }
 
+.img_ex div:nth-child(3) {
+    -webkit-animation-delay: 4s;
+            animation-delay: 4s;
+}
+.img_ex div:nth-child(2) {
+    -webkit-animation-delay: 8s;
+            animation-delay: 8s;
+}
+
 .img_ex div:nth-child(1) {
-    -webkit-animation-delay: 5s;
-            animation-delay: 5s;
+    -webkit-animation-delay: 12;
+            animation-delay: 12s;
 }
 
 .img_ex:hover div {
@@ -186,17 +187,18 @@ height:15%;
 }
 ._left a img {
     width:30%;
-    height:100%;
+    height:90%;
     margin-right: 10%;
 }
 table{
 margin-left:auto;
 margin-right:auto;
+padding:80px 80px 10px 80px;
 }
 .center{
 margin-left: 35%;
-}
 
+}
 input {
     padding:15px 15px;
     border:1px black solid;
@@ -208,77 +210,62 @@ input {
   width:30%;
  height:40%;
 }
-._log{
- margin-left:auto;
-margin-right:auto;
-margin-top:10%;
- width:40%;
- height:100%;
-     padding: 1.25rem;
-}
 
-
-
-
-.contactus-all{
-margin-left: 10%;
-    margin-right: auto;
-width:80%;
-height:100%;
-display:inline-block;
-box-shadow:0px 0px 20px black;
-}
-.contact-1{
-
-width:40%;
-height:100%;
-float:right;
-display:inline-block;
-}
-.contactus-lab{
-    width:54%;
-height:50%;
-line-height:200%;　
-padding:15px;　
-margin:20%;
-font-size:120%;
-float:left;
-}
-.contactus-bottom{
-margin:0px 3%;
-margin-top:5%;
-width:100%;
-height:30px;
-}
-.contact-footer{
-    text-align:left;
-width:50%;
-height:100px;
-margin-top: 5%;
-    margin-left: 45%;
-}
-.contact-content{
-    width:40%;
-height:100%;
-margin-right: 2%;
-    line-height:500%;
-    float:left;
-    margin-left: 3%;
-}
-.contact-text{
-    width:10%;
-height:100%;
-
-    line-height:500%;
-float:left;
+.aboutpoem{
+    border: 3px dashed #000;
+    border-left:none;
+    border-right:none;
+    margin:20px 225px ;
+    width:70%;
+    height:22%;
+    /*background-color:white;*/
 
 }
 
-.tb-td td{
-    border:1px solid black;
-    background-color:white;
+.poem{
+margin:20px 225px 20px 225px;
+text-align:center;
+font-size:20px;
+font-weight:bold;
 }
-#button:hover{
-      background-color:red;
-     -webkit-transition:color 3s;
+
+.txt:first-letter{
+font-size:30px;
+}
+
+.txt{
+padding:0px 225px;
+font-size:18px;
+line-height: 24px;
+letter-spacing: 5px;
+}
+.footer{
+margin: 10px 610px 50px 630px;
+}
+
+.bottom img{
+margin: 150px 590px 50px 590px;
+width:20%;
+height:15%;
+}
+
+.bottom ul li{
+display:inline;
+font-size:20px;
+font-weight:bold;
+}
+.tel{
+margin-left:370px;
+}
+.line{
+margin-left:100px;
+}
+.mail{
+margin-left:50px;
+}
+.address{
+margin-left:300px;
+}
+.time{
+margin-left:100px;
 }

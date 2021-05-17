@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^infodetail/(\d+)/$',views.infodetail),
 
     url(r'^contactus/',views.contactus),
+    url(r'^aboutus/',views.aboutus),
 
 
 

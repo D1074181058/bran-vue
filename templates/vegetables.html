@@ -92,7 +92,15 @@
                              "unitprice": ex_1_1[i].textContent,
                              csrfmiddlewaretoken: '{{ csrf_token }}',
                          },success:function (data){
-                            location.reload();
+                            data = JSON.parse(data);
+
+                            if (data["result"] != "True") {
+                                alert("請先登入")
+                                location.reload();
+                            }
+                            else{
+                                location.reload();
+                            }
                         }
                     })
           }
