@@ -12,6 +12,7 @@ from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from email.mime.text import MIMEText
 from smtplib import SMTP, SMTPAuthenticationError, SMTPException
+from django.contrib.auth.hashers import make_password, check_password
 
 
 def sayhello(request):
@@ -54,6 +55,7 @@ def inserorder(request):
             orderview_all = Orderview.objects.get(id=ID)
             orderview_all.delete()
     return render(request,"home.html", locals())
+
 def inserorderview(request):
     if 'account' in request.session:
         result = "True"
@@ -200,7 +202,8 @@ def signup(request):
             date = upform.cleaned_data['date']
             phone = upform.cleaned_data['phone']
             address = upform.cleaned_data['address']
-            unit = member.objects.create(Name=Name,account=account,password=password,email=email,
+            h_pa=make_password(password, None, 'pbkdf2_sha256')
+            unit = member.objects.create(Name=Name,account=account,password=h_pa,email=email,
                                          date=date,phone=phone,address=address)
             unit.save()
             return redirect('/')
@@ -219,10 +222,15 @@ def login(request):
                 account = inform.cleaned_data['account']
                 password = inform.cleaned_data['password']
                 try:
-                    unit = member.objects.get(account=account,password=password)
-                    request.session['account']=request.POST['account']
-                    message = request.session['account'] + "登入成功"
-                    log="login"
+                    if(member.objects.get(account=account)):
+                        if(check_password(password,member.objects.get(account=account).password)):
+                            request.session['account'] = request.POST['account']
+                            message = request.session['account'] + "登入成功"
+                            log = "login"
+                        else:
+                            message="密碼錯誤"
+                    else:
+                        message="帳號錯誤"
                 except member.DoesNotExist:
                     message = '該用戶尚未註冊'
 

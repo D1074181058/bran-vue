@@ -69,14 +69,17 @@
     inputall=document.querySelectorAll('input[name="del"]')
     var totalprice=0
     var n =0
+    var price = [];
     for(i=0;i<tr_all.length;++i){
      tr_all[i].id=i
     }
-    for(i=0;i<inputall.length;++i){
-        inputall[i].id=i+1
-        tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
-        totalprice += parseInt(tr_id_all[2].textContent)
+    for(i=0;i<inputall.length;++i) {
+            tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
+            price.push(tr_id_all[2].textContent)
+            inputall[i].id=i+1
+            totalprice += parseInt(price[i])
     }
+
     tr_id_all = document.querySelectorAll('tr[id="' + (inputall.length+1) + '"] > td')
     tr_id_all[1].textContent=totalprice
     function del(val){
