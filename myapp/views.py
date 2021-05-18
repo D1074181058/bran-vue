@@ -5,7 +5,7 @@ from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render,redirect
 from datetime import datetime
 from myapp.models import member,NewsUnit,Order,Orderview
-from myapp import form
+from myapp import form, models
 import math,json
 from django.template import RequestContext
 from django.core import serializers
@@ -105,6 +105,7 @@ def home(request):
     now=datetime.now()
     return render(request,"home.html",locals())
 def pig(request):
+    pigs = models.pigview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
@@ -119,6 +120,7 @@ def pig(request):
     return render(request,"pig.html",locals())
 
 def beef(request):
+    beefs=models.beefview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
@@ -137,6 +139,7 @@ def beef(request):
     now=datetime.now()
     return render(request,"beef.html",locals())
 def chicken(request):
+    chickens = models.chickenview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
@@ -150,6 +153,7 @@ def chicken(request):
     now=datetime.now()
     return render(request,"chicken.html",locals())
 def lamb(request):
+    lambs=models.lambview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
@@ -163,6 +167,7 @@ def lamb(request):
     now=datetime.now()
     return render(request,"lamb.html",locals())
 def seafood(request):
+    seafoods=models.lambview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
@@ -176,6 +181,7 @@ def seafood(request):
     now=datetime.now()
     return render(request,"seafood.html",locals())
 def agarigus(request):
+    agaricuses=models.agaricusview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
@@ -189,6 +195,7 @@ def agarigus(request):
     now=datetime.now()
     return render(request,"agaricus.html",locals())
 def vegetables(request):
+    vegetables=models.vegetableview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']

@@ -100,7 +100,61 @@
 <div id="footer">
             &copy;Copyright 2021 Pang Ger 胖哥燒烤
 </div>
+<script>
+  var cost_total = [];
+  var ex_1 = document.querySelectorAll("#ex-1");
+  var saleprices=document.querySelectorAll("#saleprice");
+  var re = /^[0-9]{1,2}$/;
+    for (var i=0; i<ex_1.length; ++i) {
+        ex_1[i].oninput = function (e) {
 
+            if (e.target.value > 99)
+                e.target.value = 99;
+            else if (!e.target.value.match(re))
+                e.target.value = '';
+            else if (e.target.value < 0)
+                e.target.value = 0;
+        }
+    }
+    for(var i=0; i<saleprices.length; ++i) {
+        cost_total.push(saleprices[i].textContent)
+    }
+  function count(){
+      for (var i=0; i<ex_1.length; ++i) {
+          let num = parseInt(ex_1[i].value)
+          if( !isNaN(num) && num !== 0){
+              var total = cost_total[i] * num;
+              saleprices[i].textContent = total;
+          }else{
+              var total = cost_total[i] * 1;
+              saleprices[i].textContent = total;
+          }
+      }
+  }
+  function my(){
+            var sales = document.querySelectorAll("#sales");
+            var ex_1 = document.querySelectorAll("#ex-1");
+            var saleprices = document.querySelectorAll("#saleprice");
+            for (var i=0; i<ex_1.length; ++i) {
+                let unitnum = parseInt(ex_1[i].value);
+                if(!isNaN(unitnum) && unitnum !== 0){
+                    $.ajax({
+                        url: "/inserorderview/",
+                        type: "POST",
+                        datatype: "json",
+                         data: {
+                            "unitname": sales[i].textContent,
+                             "unitnum": ex_1[i].value,
+                             "unitprice": saleprices[i].textContent,
+                             csrfmiddlewaretoken: '{{ csrf_token }}',
+                         },success:function (data){
+                            location.reload();
+                        }
+                    })
+          }
+      }
+  }
+    </script>
 <script>
 
 

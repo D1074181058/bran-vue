@@ -4,187 +4,22 @@
     <title>菜單-豬肉</title>
 {% endblock %}
 {% block content %}
+{% for pig in pigs %}
     <div>
-    <img  src="{% static "images/豬/三層豬.jpg"  %}"  />
+    <img  src="/static/images/豬/{{ pig.imgname }}.jpg"  />
       </br>
-        <font id='sales'>三層豬</font>
+        <font id='sales'>{{ pig.salename }}</font>
       <div>
        <table  width="220">
            <td width="25">
-               <font>數量</font><input  type="number" onchange="count()" id='ex-1' placeholder="1-99">
+               <font>數量</font><input  type="number" name="number"  onchange="count()" id='ex-1' placeholder="1-99">
            </td>
            <td width="15">
-               $<font id="ex-1-1"></font>元
+               $<font id="saleprice" name="num">{{ pig.saleprice }}</font>元
            </td>
        </table>
       </div>
     </div>
-
-    <div>
-    <img  src="{% static "images/豬/包蔥豬.jpg"  %}"  />
-      </br>
-
-        <font id='sales'>包蔥豬</font>
-
-      <div >
-       <table  width="220">
-           <td width="25">
-               <font>數量</font><input type="number" onchange="count()" id='ex-1' placeholder="1-99">
-           </td>
-           <td width="15">
-               $<font id="ex-1-1"></font>元
-           </td>
-       </table>
-      </div>
-    </div>
-
-    <div>
-    <img  src="{% static "images/豬/肥腸.jpg"  %}"  />
-      </br>
-
-        <font id='sales'>肥腸</font>
-
-      <div >
-       <table  width="220">
-           <td width="25">
-               <font>數量</font><input  type="number" onchange="count()" id='ex-1' placeholder="1-99">
-           </td>
-           <td width="15">
-               $<font id="ex-1-1"></font>元
-           </td>
-       </table>
-      </div>
-    </div>
-
-    <div>
-    <img  src="{% static "images/豬/金針豬.jpg"  %}"  />
-      </br>
-        <font id='sales'> 金針豬</font>
-      <div>
-       <table  width="220">
-           <td width="25">
-               <font>數量</font><input  type="number" onchange="count()" id='ex-1' placeholder="1-99">
-           </td>
-           <td width="15">
-               $<font id="ex-1-1"></font>元
-           </td>
-       </table>
-      </div>
-    </div>
-
-    <div>
-    <img  src="{% static "images/豬/洋蔥豬.jpg"  %}"  />
-      </br>
-        <font id='sales'> 洋蔥豬</font>
-      <div>
-       <table  width="220">
-           <td width="25">
-               <font>數量</font><input  type="number" onchange="count()" id='ex-1' placeholder="1-99">
-           </td>
-           <td width="15">
-               $<font id="ex-1-1"></font>元
-           </td>
-       </table>
-      </div>
-    </div>
-
-    <div>
-    <img  src="{% static "images/豬/香腸.jpg"  %}"  />
-      </br>
-        <font id='sales'> 香腸 </font>
-      <div>
-      <table  width="220">
-           <td width="25">
-               <font>數量</font><input  type="number" onchange="count()" id='ex-1' placeholder="1-99">
-           </td>
-           <td width="15">
-               $<font id="ex-1-1"></font>元
-           </td>
-       </table>
-      </div>
-    </div>
-
-    <div>
-    <img  src="{% static "images/豬/培根麻糬.jpg"  %}"  />
-      </br>
-        <font id='sales'> 培根麻糬 </font>
-      <div>
-       <table  width="220">
-           <td width="25">
-               <font>數量</font><input  type="number" onchange="count()" id='ex-1' placeholder="1-99">
-           </td>
-           <td width="15">
-               $<font id="ex-1-1"></font>元
-           </td>
-       </table>
-      </div>
-    </div>
-
-    <div>
-    <img  src="{% static "images/豬/豬肉串.jpg"  %}"  />
-      </br>
-        <font id='sales'> 豬肉串 </font>
-      <div>
-       <table  width="220">
-           <td width="25">
-               <font>數量</font><input  type="number" onchange="count()" id='ex-1' placeholder="1-99">
-           </td>
-           <td width="15">
-               $<font id="ex-1-1"></font>元
-           </td>
-       </table>
-      </div>
-    {{ get_name.Name}}
-    </div>
-    <script>
-    var ex_cost = [30,29,25,22,24,28,26,23];
-       var ex_1 = document.querySelectorAll("#ex-1");
-  var ex_1_1=document.querySelectorAll("#ex-1-1");
-    for (var i=0; i<ex_1.length; ++i) {
-        ex_1[i].oninput = function (e) {
-            if (e.target.value > 99)
-                e.target.value = 99;
-            else if (e.target.value < 0)
-                e.target.value = 0;
-        }
-    }
-        function count(){
-  for (var i=0; i<ex_1.length; ++i) {
-      let num = parseInt(ex_1[i].value)
-
-      if(ex_1[i].value !== "" ){
-          var total = ex_cost[i] * num;
-          ex_1_1[i].textContent = total;
-      }else{
-          var total = ex_cost[i] * 0;
-          ex_1_1[i].textContent = total;
-      }
-  }
-  }
-   function my(){
-            var sales = document.querySelectorAll("#sales");
-            var ex_1 = document.querySelectorAll("#ex-1");
-            var ex_1_1 = document.querySelectorAll("#ex-1-1");
-            for (var i=0; i<ex_1.length; ++i) {
-                if(ex_1[i].value !== "" ){
-                    $.ajax({
-                        url: "/inserorderview/",
-                        type: "POST",
-                         data: {
-                            "unitname": sales[i].textContent,
-                             "unitnum": ex_1[i].value,
-                             "unitprice": ex_1_1[i].textContent,
-                             csrfmiddlewaretoken: '{{ csrf_token }}',
-                         },success:function (data){
-                            data = JSON.parse(data);
-                                location.reload();
-
-                        }
-                    })
-          }
-      }
-  }
-    </script>
-
+{% endfor %}
 
 {% endblock %}

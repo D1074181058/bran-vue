@@ -49,6 +49,49 @@ class Orderview(models.Model):
         return self.customname
 
 
+class beefview(models.Model):
+    salename = models.CharField(max_length=20)
+    saleprice = models.IntegerField(default=0)
+    imgname = models.CharField(max_length=20)
+    def __str__(self):
+        return self.salename
+class pigview(models.Model):
+    salename = models.CharField(max_length=20)
+    saleprice = models.IntegerField(default=0)
+    imgname = models.CharField(max_length=20)
+    def __str__(self):
+        return self.salename
+class chickenview(models.Model):
+    salename = models.CharField(max_length=20)
+    saleprice = models.IntegerField(default=0)
+    imgname = models.CharField(max_length=20)
+    def __str__(self):
+        return self.salename
+class lambview(models.Model):
+    salename = models.CharField(max_length=20)
+    saleprice = models.IntegerField(default=0)
+    imgname = models.CharField(max_length=20)
+    def __str__(self):
+        return self.salename
+class agaricusview(models.Model):
+    salename = models.CharField(max_length=20)
+    saleprice = models.IntegerField(default=0)
+    imgname = models.CharField(max_length=20)
+    def __str__(self):
+        return self.salename
+class seafoodview(models.Model):
+    salename = models.CharField(max_length=20)
+    saleprice = models.IntegerField(default=0)
+    imgname = models.CharField(max_length=20)
+    def __str__(self):
+        return self.salename
+class vegetableview(models.Model):
+    salename = models.CharField(max_length=20)
+    saleprice = models.IntegerField(default=0)
+    imgname = models.CharField(max_length=20)
+    def __str__(self):
+        return self.salename
+
 
 
 
