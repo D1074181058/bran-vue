@@ -167,7 +167,7 @@ def lamb(request):
     now=datetime.now()
     return render(request,"lamb.html",locals())
 def seafood(request):
-    seafoods=models.lambview.objects.all()
+    seafoods=models.seafoodview.objects.all()
     if 'account' in request.session:
         log = 'login'
         account = request.session['account']
