@@ -15,6 +15,8 @@ from smtplib import SMTP, SMTPAuthenticationError, SMTPException
 from django.contrib.auth.hashers import make_password, check_password
 
 
+
+@csrf_exempt
 def sayhello(request):
     return HttpResponse("Django")
 def test(request):
@@ -125,8 +127,11 @@ def beef(request):
             viewlen = len(orderview)
         except Orderview.DoesNotExist:
             viewlen=""
+        message = request.session['account'] + "已登入"
+    else:
+        log ='out'
 
-        message = request.session['account']+"已登入"
+
 
 
     now=datetime.now()
@@ -249,20 +254,18 @@ def login(request):
     return render(request, "login.html", locals())
 
 def logout(request):
-    inform = form.loginform(request.POST)
     if 'account' in request.session:
-        message=request.session['account']+"已登出"
-        del request.session['account']
-        inform = form.loginform()
-
-    return render(request, "home.html", locals())
+            log='out'
+            massage=request.session['account']
+            del request.session['account']
+    return render(request, "logout.html", locals())
 
 def hlogout(request):
-    inform = form.loginform(request.POST)
+
     if 'account' in request.session:
         message=request.session['account']+"已登出"
         del request.session['account']
-        inform = form.loginform()
+
 
     return render(request, "login.html", locals())
 

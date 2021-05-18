@@ -45,6 +45,7 @@ urlpatterns = [
     url(r'^login/',views.login),
     url(r'^captcha/',include('captcha.urls')),
     url(r'^logout/',views.logout),
+    url(r'^hlogout/',views.hlogout),
 
 
     url(r'^backview/',views.backview),

@@ -14,7 +14,7 @@
     {% if log == 'login' %}
      {{ message }}
     <a>/</a>
-    <a href="/logout">登出</a>
+    <a href="/logout" onclick="">登出</a>
     {% else %}
     <a href="/login">登入</a>
     <a>/</a>
@@ -90,7 +90,9 @@
             <input align="center" valign="center"  onclick="self.location.href='/sal_view'" type="submit" name="button" id="button" value="購物車({{ viewlen }})">
         {% endif %}
     {% else %}
-    <font >尚未登入 還無法購買</font>
+        <div style="margin-top:5%">
+         <font >尚未登入 還無法購買</font>
+        </div>
     {% endif %}
 
 
@@ -98,6 +100,28 @@
 <div id="footer">
             &copy;Copyright 2021 Pang Ger 胖哥燒烤
 </div>
+
+<script>
+
+
+    function logout(){
+
+        $.ajax({
+                        url: "/logout/",
+                        type: "POST",
+                        dataType:"json",
+                         data: {
+                            srfmiddlewaretoken: '{{ csrf_token }}',
+                            },success:function (data){
+                            data = JSON.parse(data);
+                            console.log(data);
+                            location.reload();
+                              }
+
+        })
+
+    }
+</script>
 
 </body>
 </html>
