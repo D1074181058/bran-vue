@@ -6,7 +6,7 @@ from django.shortcuts import render,redirect
 from datetime import datetime
 from myapp.models import member,NewsUnit,Order,Orderview
 from myapp import form, models
-import math,json
+import math,json,random,string
 from django.template import RequestContext
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
@@ -208,28 +208,105 @@ def vegetables(request):
 
     now=datetime.now()
     return render(request,"vegetables.html",locals())
+
+
+class sic:
+    s_str=0
+    Name =""
+    account=""
+    password=""
+    email=""
+    date=""
+    phone=""
+    address=""
+    str=""
+
 def signup(request):
     if request.method =="POST":
-        upform=form.signupform(request.POST)
-        if upform.is_valid():
-            Name=upform.cleaned_data['Name']
-            account = upform.cleaned_data['account']
-            password = upform.cleaned_data['password']
-            email = upform.cleaned_data['email']
-            date = upform.cleaned_data['date']
-            phone = upform.cleaned_data['phone']
-            address = upform.cleaned_data['address']
-            h_pa=make_password(password, None, 'pbkdf2_sha256')
-            unit = member.objects.create(Name=Name,account=account,password=h_pa,email=email,
-                                         date=date,phone=phone,address=address)
-            unit.save()
-            return redirect('/')
-        else:
-            message='有欄位錯誤'
+            upform = form.signupform(request.POST)
+            if upform:
+                if upform.is_valid():
+                    sic.Name = upform.cleaned_data['Name']
+                    sic.account = upform.cleaned_data['account']
+                    sic.password = upform.cleaned_data['password']
+                    sic.email = upform.cleaned_data['email']
+                    sic.date = upform.cleaned_data['date']
+                    sic.phone = upform.cleaned_data['phone']
+                    sic.address = upform.cleaned_data['address']
+
+                    sic.s_str = "".join(random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'
+                                                          , 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w'
+                                                          , 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8',
+                                                       '9'
+                                                          , 'A', 'B', 'C', 'D', 'E', 'F', 'G'
+                                                          , 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'
+                                                          , 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'], 6)).replace(" ","")
+                    strSmtp = "smtp.gmail.com:587"
+                    strAccount = "4181062@gmail.com"
+                    strPassword = "d1074181062"
+
+                    content= "驗證碼:"+sic.s_str
+                    msg = MIMEText(content)
+
+                    msg["Subject"] = "帳號認證"
+                    mailto = sic.email
+
+                    server = SMTP(strSmtp)
+                    server.ehlo()
+                    server.starttls()
+                    try:
+                        server.login(strAccount, strPassword)
+                        server.sendmail(strAccount, mailto, msg.as_string())
+                        hint = "郵件已發送！"
+                    except SMTPAuthenticationError:
+                        hint = "無法登入！"
+                    except:
+                        hint = "郵件發送產生錯誤！"
+                    server.quit()
+
+                    return redirect('/em_cap')
+                else:
+                    message = '有欄位錯誤'
     else:
         upform = form.signupform()
-
     return render(request, "signup.html", locals())
+
+def em_cap(request):
+    ran= sic.s_str
+    massage = sic.str
+    em=sic.email
+    if request.method == "POST":
+        if request.POST.get("cap") == ran:
+            massage= sic.str= "成功"
+            h_pa = make_password(sic.password, None, 'pbkdf2_sha256')
+            unit = member.objects.create(Name=sic.Name, account=sic.account, password=h_pa, email=sic.email,
+                                          date=sic.date, phone=sic.phone, address=sic.address)
+            unit.save()
+
+            sic.Name = ""
+            sic.account = ""
+            sic.password = ""
+            sic.email = ""
+            sic.date = ""
+            sic.phone = ""
+            sic.address = ""
+        elif request.POST.get("cap") == "":
+            massage = sic.str = ""
+        elif request.POST.get("cap") != ran:
+            massage = sic.str = "錯誤"
+        else:
+            massage=sic.str=""
+
+
+
+
+
+    return render(request, "em_cap.html", locals())
+
+
+
+
+
 
 def login(request):
     if request.method =="POST":

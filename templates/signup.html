@@ -10,6 +10,7 @@
     <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
 </head>
 <body style="background-color:PapayaWhip">
+
 <div class="_log" style="background-color:White;">
     <div style="margin-top:5%;">
     <span style="vertical-align:middle">
@@ -19,11 +20,13 @@
         </a>
     </span>
     </div>
-    <div style="margin-top:8%;margin-bottom:5%;margin-left:auto;margin-right:15%;">
-        <form action="." method="POST" name="form1">
-            {% csrf_token %}
 
-            <table >
+{{ str }}
+
+    <div style="margin-top:8%;margin-bottom:5%;margin-left:auto;margin-right:15%;">
+            <form action="." method="POST" name="form1">
+            {% csrf_token %}
+            <table>
                 <tr>
                     <th>姓名</th><td>{{ upform.Name }}</td>
                 </tr>
@@ -45,16 +48,18 @@
                 <tr>
                     <th>地址</th><td>{{ upform.address }}</td>
                 </tr>
-
-            </table>
-            <div style="margin-top:8%;margin-bottom:5%;margin-left:45%;">
-              <input type="submit" name="button" id="button" value="送出">
-              <input type="reset" name="button2" id="button2" value="重設">
-            </div>
-
-        </form>
+                </table>
+                <div style="margin-top:8%;margin-bottom:5%;margin-left:45%;">
+                  <input type="submit" name="button" id="button" value="送出">
+                  <input type="reset" name="button2" id="button2" value="重設">
+                </div>
+            </form>
         <span style="color: red"></span>
     </div>
+
+
+
 </div>
+
 </body>
 </html>

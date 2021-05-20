@@ -107,7 +107,6 @@
   var re = /^[0-9]{1,2}$/;
     for (var i=0; i<ex_1.length; ++i) {
         ex_1[i].oninput = function (e) {
-
             if (e.target.value > 99)
                 e.target.value = 99;
             else if (!e.target.value.match(re))
