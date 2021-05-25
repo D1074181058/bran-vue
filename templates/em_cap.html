@@ -16,7 +16,7 @@
 <div class="_log" style="background-color:White;">
 
    {% if message != "成功" %}
-
+       {% if em != "" %}
            <div style="text-align:center;margin-left:25%;margin-right:35%;">
                <b><font >驗證碼已發送至{{ em }}</font></b>
            </div>
@@ -31,6 +31,12 @@
            <div style="margin-top:5%;margin-left:40%;margin-right:40%;">
                <input type="button" name="button" onclick="send()" id="button" value="送出">
            </div>
+       {% else %}
+           <script  language="javascript">
+               location.href='/signup';
+           </script>
+
+       {% endif %}
 
    {% else %}
        <div style="text-align:center;margin-left:25%;margin-right:35%;">
@@ -40,6 +46,7 @@
            返回<a href="" onclick="del()">首頁</a>
        </div>
    {% endif %}
+
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -85,7 +92,7 @@ window.onload=function runoob(){
             url: "/em_cap/",
             type: "POST",
             data: {
-                "cap":"1",
+
                 "cls":"1",
                 csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val()
             }, success: function (data) {
