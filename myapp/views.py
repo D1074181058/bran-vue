@@ -222,6 +222,8 @@ class sic:
     str=""
 
 def signup(request):
+    if 'account' in request.session:
+        log='login'
     if request.method =="POST":
             upform = form.signupform(request.POST)
             if upform:
@@ -233,56 +235,68 @@ def signup(request):
                     sic.date = upform.cleaned_data['date']
                     sic.phone = upform.cleaned_data['phone']
                     sic.address = upform.cleaned_data['address']
-
-                    sic.s_str = "".join(random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'
-                                                          , 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w'
-                                                          , 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8',
-                                                       '9'
-                                                          , 'A', 'B', 'C', 'D', 'E', 'F', 'G'
-                                                          , 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'
-                                                          , 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'], 6)).replace(" ","")
-                    strSmtp = "smtp.gmail.com:587"
-                    strAccount = "4181062@gmail.com"
-                    strPassword = "d1074181062"
-
-                    content= "驗證碼:"+sic.s_str
-                    msg = MIMEText(content)
-
-                    msg["Subject"] = "帳號認證"
-                    mailto = sic.email
-
-                    server = SMTP(strSmtp)
-                    server.ehlo()
-                    server.starttls()
                     try:
-                        server.login(strAccount, strPassword)
-                        server.sendmail(strAccount, mailto, msg.as_string())
-                        hint = "郵件已發送！"
-                    except SMTPAuthenticationError:
-                        hint = "無法登入！"
-                    except:
-                        hint = "郵件發送產生錯誤！"
-                    server.quit()
+                        models.member.objects.get(email=sic.email)
+                        em_error = "該信箱被註冊過"
+                        try:
+                            models.member.objects.get(account=sic.account)
+                            ac_error = "該用戶被註冊過"
+                        except:
+                            ac_error=""
+                    except member.DoesNotExist:
+                        try:
+                            models.member.objects.get(account=sic.account)
+                            ac_error = "該用戶被註冊過"
+                        except member.DoesNotExist:
+                            sic.s_str = "".join(
+                                random.sample(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'
+                                                  , 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w'
+                                                  , 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7',
+                                               '8', '9'
+                                                  , 'A', 'B', 'C', 'D', 'E', 'F', 'G'
+                                                  , 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R'
+                                                  , 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'], 6)).replace(
+                                " ", "")
 
-                    return redirect('/em_cap')
-                else:
-                    message = '有欄位錯誤'
+                            strSmtp = "smtp.gmail.com:587"
+                            strAccount = "4181062@gmail.com"
+                            strPassword = "d1074181062"
+
+                            content = "驗證碼:" + sic.s_str
+                            msg = MIMEText(content)
+
+                            msg["Subject"] = "帳號認證"
+                            mailto = sic.email
+
+                            server = SMTP(strSmtp)
+                            server.ehlo()
+                            server.starttls()
+                            try:
+                                server.login(strAccount, strPassword)
+                                server.sendmail(strAccount, mailto, msg.as_string())
+                                hint = "郵件已發送！"
+                            except SMTPAuthenticationError:
+                                hint = "無法登入！"
+                            except:
+                                hint = "郵件發送產生錯誤！"
+                            server.quit()
+                            return redirect('/em_cap')
+
     else:
         upform = form.signupform()
     return render(request, "signup.html", locals())
 
 def em_cap(request):
     ran= sic.s_str
-    massage = sic.str
+    message = sic.str
     em=sic.email
+
     if request.method == "POST":
         if request.POST.get("cap") == ran:
-            massage= sic.str= "成功"
             h_pa = make_password(sic.password, None, 'pbkdf2_sha256')
             unit = member.objects.create(Name=sic.Name, account=sic.account, password=h_pa, email=sic.email,
                                           date=sic.date, phone=sic.phone, address=sic.address)
             unit.save()
-
             sic.Name = ""
             sic.account = ""
             sic.password = ""
@@ -290,14 +304,14 @@ def em_cap(request):
             sic.date = ""
             sic.phone = ""
             sic.address = ""
+            sic.s_str=""
+            message = sic.str = "成功"
+        elif request.POST.get("cls"):
+            sic.str = ""
         elif request.POST.get("cap") == "":
-            massage = sic.str = ""
+            message = sic.str = ""
         elif request.POST.get("cap") != ran:
-            massage = sic.str = "錯誤"
-        else:
-            massage=sic.str=""
-
-
+            message = sic.str = "錯誤"
 
 
 
@@ -309,6 +323,8 @@ def em_cap(request):
 
 
 def login(request):
+    if 'account' in request.session:
+        log='login'
     if request.method =="POST":
         inform = form.loginform(request.POST)
         if inform.is_valid():
@@ -316,24 +332,21 @@ def login(request):
                 account = inform.cleaned_data['account']
                 password = inform.cleaned_data['password']
                 try:
-                    if(member.objects.get(account=account)):
-                        if(check_password(password,member.objects.get(account=account).password)):
-                            request.session['account'] = request.POST['account']
-                            message = request.session['account'] + "登入成功"
-                            log = "login"
-                        else:
-                            message="密碼錯誤"
+                    omember=member.objects.get(account=account)
+                    if(check_password(password,omember.password)):
+                        request.session['account'] = request.POST['account']
+                        message = request.session['account'] + "登入成功"
+                        log = "login"
                     else:
-                        message="帳號錯誤"
+                        pa_message="密碼錯誤"
+
                 except member.DoesNotExist:
                     message = '該用戶尚未註冊'
 
-            else:
-                messsage=request.session['account']+"已登入"
-        else:
-            message='有欄位錯誤'
+
+
     else:
-        message='輸入'
+
         inform = form.loginform()
     return render(request, "login.html", locals())
 

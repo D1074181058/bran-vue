@@ -8,20 +8,22 @@
     <title>驗證</title>
     {% load static %}
     <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON" />
 </head>
-<body style="background-color:PapayaWhip">
+<body style="background-color:PapayaWhip" >
 {% csrf_token %}
+
 <div class="_log" style="background-color:White;">
 
-   {% if massage != "成功" %}
-       {% if em != "" %}
+   {% if message != "成功" %}
+
            <div style="text-align:center;margin-left:25%;margin-right:35%;">
                <b><font >驗證碼已發送至{{ em }}</font></b>
            </div>
-           <div style="margin-top:5%;margin-left:32%;margin-right:40%;">
+           <div style="margin-top:5%;margin-left:34%;margin-right:40%;">
                <input  type="text" name="cap"  id='ex' >
            </div>
-           {% if massage != "" %}
+           {% if message == "錯誤" %}
                <div style="text-align:center;margin-left:25%;margin-right:35%;">
                    <span style="color: red"> 驗證碼錯誤</span>
                </div>
@@ -29,17 +31,13 @@
            <div style="margin-top:5%;margin-left:40%;margin-right:40%;">
                <input type="button" name="button" onclick="send()" id="button" value="送出">
            </div>
-       {% else %}
-           <div style="text-align:center;margin-left:25%;margin-right:35%;">
-               <b><font >{{ em }}請返回<a href="/signup">註冊</a>頁面做註冊</font></b>
-           </div>
-       {% endif %}
+
    {% else %}
        <div style="text-align:center;margin-left:25%;margin-right:35%;">
-           <font id="mas">{{ massage }}</font>
+           <font id="mas">{{ message }}</font>
        </div>
        <div style="text-align:center;margin-left:25%;margin-right:35%;">
-           <a href="/" onclick="delmassage()">返回首頁</a>
+           返回<a href="" onclick="del()">首頁</a>
        </div>
    {% endif %}
 </div>
@@ -48,18 +46,23 @@
     var news = document.getElementById('mas');
     var t=10;
 
-    $.ajax({
+
+window.onload=function runoob(){
+
+        $.ajax({
             url: "/em_cap/",
             type: "POST",
             data: {
-                "name":"驗證碼",
-                "cap":"",
-                csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val()
+                "cls":"1",
+                csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val()
             }, success: function (data) {
 
             }
-
         })
+
+
+}
+
 
     function send()
     {
@@ -73,36 +76,40 @@
                 "cap":ex.value,
                 csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val()
             }, success: function (data) {
-                location.reload();
+                location.reload()
             }
         })
     }
-
-    function delmassage(){
+    function del(){
         $.ajax({
             url: "/em_cap/",
             type: "POST",
             data: {
-                "cell":"",
-                csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val(),
+                "cap":"1",
+                "cls":"1",
+                csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val()
             }, success: function (data) {
-
+                location.href='/';
             }
-
         })
+
     }
+
+
     function showTime(){
     t -= 1;
     document.getElementById('mas').innerHTML= "註冊成功，該頁面將於"+t+"秒返回首頁";
     if(t==0)
     {
-        delmassage();
-        location.href='/';
+        del();
+        {#location.href='/';#}
     }
     setTimeout("showTime()",1000);
     }
-    if(news.textContent == "成功"){
+    if(news){
+        if(news.textContent == "成功"){
         showTime();
+    }
     }
 </script>
 </body>

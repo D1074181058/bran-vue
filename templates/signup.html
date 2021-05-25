@@ -5,60 +5,83 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>註冊</title>
     {% load static %}
     <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON" />
 </head>
 <body style="background-color:PapayaWhip">
 
 <div class="_log" style="background-color:White;">
     <div style="margin-top:5%;">
-    <span style="vertical-align:middle">
-        <a href="/">
-        <img style="width:30%;
-    height:100%;margin-left:30%;margin-right:40%;margin-top:1%;" src="{% static "images/招牌.png" %}"  />
-        </a>
-    </span>
+        <span style="vertical-align:middle">
+            <a href="/">
+                <img style="width:30%;height:100%;margin-left:35%;margin-right:40%;margin-top:1%;" src="{% static "images/招牌.png" %}"  />
+            </a>
+        </span>
     </div>
+    {% if log == 'login' %}
+          <div style="text-align: center">會員已登入，如需註冊請<a href="/logout">登出</a>或<a href="/">返回首頁</a></div>
+    {% else %}
 
-{{ str }}
-
-    <div style="margin-top:8%;margin-bottom:5%;margin-left:auto;margin-right:15%;">
+    <div style="margin-top:8%;margin-bottom:5%;margin-left:10%;margin-right:15%;">
             <form action="." method="POST" name="form1">
             {% csrf_token %}
             <table>
                 <tr>
-                    <th>姓名</th><td>{{ upform.Name }}</td>
+                    <th>姓名</th><td>{{ upform.Name }}</td>{{ upform.Name.errors }}
+
+                </tr>
+                <tr>
+                    <th></th><td>{{ upform.Name.errors }}</td>
                 </tr>
                 <tr>
                     <th>帳號</th><td>{{ upform.account }}</td>
                 </tr>
                 <tr>
+                    <th></th><td>{{ upform.account.errors }}{{ ac_error }}</td>
+                </tr>
+                <tr>
                     <th>密碼</th><td>{{ upform.password }}</td>
+                </tr>
+                <tr>
+                    <th></th><td>{{ upform.password.errors }}</td>
                 </tr>
                 <tr>
                     <th>電子信箱</th><td>{{ upform.email }}</td>
                 </tr>
                 <tr>
+                    <th></th><td>{{ upform.email.errors }}{{ em_error }}</td>
+                </tr>
+                <tr>
                     <th>生日</th><td>{{ upform.date }}</td>
+                </tr>
+                <tr>
+                    <th></th><td>{{ upform.date.errors }}</td>
                 </tr>
                 <tr>
                     <th>手機</th><td>{{ upform.phone }}</td>
                 </tr>
                 <tr>
+                    <th></th><td>{{ upform.phone.errors }}</td>
+                </tr>
+                <tr>
                     <th>地址</th><td>{{ upform.address }}</td>
                 </tr>
+                <tr>
+                    <th></th><td>{{ upform.address.errors }}</td>
+                </tr>
                 </table>
+
+
                 <div style="margin-top:8%;margin-bottom:5%;margin-left:45%;">
                   <input type="submit" name="button" id="button" value="送出">
                   <input type="reset" name="button2" id="button2" value="重設">
                 </div>
             </form>
-        <span style="color: red"></span>
+        <span style="color: #ff0000"></span>
     </div>
-
-
-
+    {% endif %}
 </div>
 
 </body>

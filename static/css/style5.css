@@ -215,7 +215,8 @@ input {
     border: 3px dashed #000;
     border-left:none;
     border-right:none;
-    margin:20px 225px ;
+    margin-top: 1% ;
+    margin-left: 15% ;
     width:70%;
     height:22%;
     /*background-color:white;*/
@@ -223,10 +224,11 @@ input {
 }
 
 .poem{
-margin:20px 225px 20px 225px;
+margin-left: 2%;
 text-align:center;
 font-size:20px;
 font-weight:bold;
+    height:100%;
 }
 
 .txt:first-letter{
@@ -240,11 +242,16 @@ line-height: 24px;
 letter-spacing: 5px;
 }
 .footer{
-margin: 10px 610px 50px 630px;
+    margin-top:5%;
+    margin-left:43%;
+}
+.bottom{
+    margin-top: 5%;
+
 }
 
 .bottom img{
-margin: 150px 590px 50px 590px;
+margin-left: 40%;
 width:20%;
 height:15%;
 }
@@ -255,17 +262,17 @@ font-size:20px;
 font-weight:bold;
 }
 .tel{
-margin-left:370px;
+margin-left:27%;
 }
 .line{
-margin-left:100px;
+margin-left:5%;
 }
 .mail{
-margin-left:50px;
+margin-left:5%;
 }
 .address{
-margin-left:300px;
+margin-left:27%;
 }
 .time{
-margin-left:100px;
+margin-left:5%;
 }
