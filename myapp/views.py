@@ -280,7 +280,7 @@ def signup(request):
                             except:
                                 hint = "郵件發送產生錯誤！"
                             server.quit()
-                            return redirect('/em_cap')
+                            return redirect('/signup/em_cap')
 
     else:
         upform = form.signupform()
@@ -312,8 +312,6 @@ def em_cap(request):
             message = sic.str = ""
         elif request.POST.get("cap") != ran:
             message = sic.str = "錯誤"
-
-
 
     return render(request, "em_cap.html", locals())
 
