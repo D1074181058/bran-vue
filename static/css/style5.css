@@ -230,13 +230,15 @@ font-size:200%;
 font-weight:bold;
     height:100%;
 }
-
+.abouttxt{
+    margin-top: 3%;
+}
 .txt:first-letter{
-font-size:30px;
+font-size:200%;
 }
 
 .txt{
-padding:0px 225px;
+padding:0 10%;
 font-size:128%;
 line-height: 100%;
 letter-spacing: 5px;
@@ -256,6 +258,7 @@ height:15%;
 }
 .bottom-options
 {
+    margin-left: 26%;
     margin-right: auto;
 }
 .bottom ul li{
@@ -264,7 +267,7 @@ font-size:150%;
 font-weight:bold;
 }
 .tel{
-margin-left:27%;
+margin-left:auto;
 }
 .line{
 margin-left:5%;
@@ -273,7 +276,7 @@ margin-left:5%;
 margin-left:5%;
 }
 .address{
-margin-left:27%;
+
 }
 .time{
 margin-left:5%;
