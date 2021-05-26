@@ -33,30 +33,30 @@
 
 </div>
 {% if orderviewall %}
-<table border="1" style="padding:10px; background-color:#eee;"  >
+    <table border="1" style="padding:10px; background-color:#eee;"  >
            <tr class="tb-td" name="list">
                 <td name ="salename" >商品名稱</td>
                 <td name ="salenum" >商品數量</td>
                 <td name ="saleprice" >商品價格</td>
             </tr>
- {% for unit in orderviewall %}
+        {% for unit in orderviewall %}
             <tr class="tb-td" name="list">
                 <td id="{{unit.id}}" name ="salename" >{{unit.salename}}</td>
                 <td name ="salenum" >{{unit.salenum}}</td>
                 <td name ="saleprice" >{{unit.saleprice}}</td>
                 <td><input type="button" name="del" onclick="del(this)" value="刪除"></td>
             </tr>
- {% endfor %}
+        {% endfor %}
             <tr class="tb-td" name="list">
                <td> 總價</td>
                 <td></td>
              </tr>
-</table>
+    </table>
     <div style="text-align:center;margin-top:10%">
-    <input align="center" valign="center" onclick="inserorder()" type="submit" name="button" id="button" value="結帳">
-    <input align="center" valign="center"  onclick="javascript:history.back(-1);" type="submit" name="button" id="button" value="繼續購物">
+        <input align="center" valign="center" onclick="inserorder()" type="submit" name="button" id="button" value="結帳">
+        <input align="center" valign="center"  onclick="javascript:history.back(-1);" type="submit" name="button" id="button" value="繼續購物">
     </div>
-    {% else %}
+{% else %}
     <div style="text-align:center">
     <font >尚無資料</font>
     </div>

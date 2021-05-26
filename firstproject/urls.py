@@ -41,8 +41,9 @@ urlpatterns = [
 
 
 
-    url(r'^signup/',views.signup),
-    url(r'^signup/em_cap/',views.em_cap),
+    url(r'^signup/$',views.signup),
+    url(r'^signup/em_cap/$',views.em_cap),
+
     url(r'^login/',views.login),
     url(r'^captcha/',include('captcha.urls')),
     url(r'^logout/',views.logout),
