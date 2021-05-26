@@ -222,12 +222,18 @@ input {
 }
 
 .poem{
+    margin:auto;
+   padding-left: 45%;
+    padding-right: 40%;
+    margin-bottom: 0 ;
 
 text-align:center;
 font-size:130%;
 font-weight:bold;
-line-height: 200%;
-    height:100%;
+position: relative;
+height:100%;
+line-height:150%;
+
 }
 .abouttxt{
     margin-top: 3%;
@@ -257,12 +263,13 @@ height:15%;
 }
 .bottom-options
 {
-    margin-left: 24%;
-    margin-right: auto;
+    margin-left:30%;
+    margin-right: 10%;
+
 }
 .bottom ul li{
 display:inline;
-font-size:150%;
+font-size:130%;
 font-weight:bold;
 }
 .tel{
@@ -278,5 +285,5 @@ margin-left:5%;
 margin-left:auto;
 }
 .time{
-margin-left:5%;
+margin-left:2%;
 }
