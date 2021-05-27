@@ -33,47 +33,45 @@
 
                 </tr>
                 <tr>
-                    <th></th><td>{{ upform.Name.errors }}</td>
+                    <th></th><td style="color: red">{{ upform.Name.errors }}</td>
                 </tr>
                 <tr>
-                    <th>帳號</th><td>{{ upform.account }}</td>
+                    <th>帳號</th><td >{{ upform.account }}</td>
                 </tr>
                 <tr>
-                    <th></th><td>{{ upform.account.errors }}{{ ac_error }}</td>
+                    <th></th><td style="color: red">{{ upform.account.errors }}{{ ac_error }}</td>
                 </tr>
                 <tr>
                     <th>密碼</th><td>{{ upform.password }}</td>
                 </tr>
                 <tr>
-                    <th></th><td>{{ upform.password.errors }}</td>
+                    <th></th><td style="color: red">{{ upform.password.errors }}</td>
                 </tr>
                 <tr>
-                    <th>電子信箱</th><td>{{ upform.email }}</td>
+                    <th>電子信箱</th><td >{{ upform.email }}</td>
                 </tr>
                 <tr>
-                    <th></th><td>{{ upform.email.errors }}{{ em_error }}</td>
+                    <th></th><td style="color: red">{{ upform.email.errors }}{{ em_error }}</td>
                 </tr>
                 <tr>
                     <th>生日</th><td>{{ upform.date }}</td>
                 </tr>
                 <tr>
-                    <th></th><td>{{ upform.date.errors }}</td>
+                    <th></th><td style="color: red">{{ upform.date.errors }}</td>
                 </tr>
                 <tr>
                     <th>手機</th><td>{{ upform.phone }}</td>
                 </tr>
                 <tr>
-                    <th></th><td>{{ upform.phone.errors }}</td>
+                    <th></th><td style="color: red">{{ upform.phone.errors }}</td>
                 </tr>
                 <tr>
                     <th>地址</th><td>{{ upform.address }}</td>
                 </tr>
                 <tr>
-                    <th></th><td>{{ upform.address.errors }}</td>
+                    <th></th><td style="color: red">{{ upform.address.errors }}</td>
                 </tr>
                 </table>
-
-
                 <div style="margin-top:8%;margin-bottom:5%;margin-left:45%;">
                   <input type="submit" name="button" id="button" value="送出">
                   <input type="reset" name="button2" id="button2" value="重設">
