@@ -147,6 +147,7 @@
                              "unitprice": saleprices[i].textContent,
                              csrfmiddlewaretoken: '{{ csrf_token }}',
                          },success:function (data){
+                            alert("訂購成功");
                             location.reload();
                         }
                     })
