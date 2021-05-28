@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from email.mime.text import MIMEText
 from smtplib import SMTP, SMTPAuthenticationError, SMTPException
 from django.contrib.auth.hashers import make_password, check_password
-
+import json
 
 
 @csrf_exempt
@@ -48,32 +48,45 @@ def inserorder(request):
         if request.method == "POST":
             account = request.session['account']
             name = member.objects.get(account=account).Name
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            unit = Order.objects.create(customname=name,customaccount=account,unitname=unitname, unitnum=unitnum, unitprice=unitprice,nowtime=now)
-            unit.save()
-            ID = request.POST.get("view_id")
-            orderview_all = Orderview.objects.get(id=ID)
-            orderview_all.delete()
-    return render(request,"home.html", locals())
+            datas = json.loads(request.POST.get("data"))
+
+            for data in datas:
+                unit = Order.objects.create(customname=name, customaccount=account, unitname=data[1],
+                                            unitnum=data[2], unitprice=data[3], nowtime=now)
+                unit.save()
+                orderview = Orderview.objects.get(id=data[0])
+                orderview.delete()
+
+            result = 'true'
+
+
+    return HttpResponse(json.dumps({"result": result}))
 
 def inserorderview(request):
+
     if 'account' in request.session:
-        result = "True"
         if request.method == "POST":
             account = request.session['account']
             name = member.objects.get(account=account).Name
-            unitname = request.POST.get("unitname")
-            unitnum = request.POST.get("unitnum")
-            unitprice = request.POST.get("unitprice")
-            try:
-                unit=Orderview.objects.get(customaccount=account,salename=unitname)
-                unit.salenum = int(unit.salenum)+int(unitnum)
-                unit.saleprice = int(unit.saleprice)+int(unitprice)
-            except Orderview.DoesNotExist:
-                unit = Orderview.objects.create(customname=name,customaccount=account,salename=unitname, salenum=unitnum, saleprice=unitprice)
-            unit.save()
+            datas = json.loads(request.POST.get("data"))
+
+            for data in datas:
+                result = 'true'
+                if data:
+                    try:
+                        unit = Orderview.objects.get(customaccount=account, salename=data[0])
+                        unit.salenum = int(unit.salenum) + int(data[1])
+                        unit.saleprice = int(unit.saleprice) + int(data[2])
+                    except Orderview.DoesNotExist:
+
+                        unit = Orderview.objects.create(customname=name, customaccount=account,
+                                                        salename=data[0], salenum=data[1],
+                                                        saleprice=data[2])
+
+                    unit.save()
+
+
+
     else:
         result = "Error"
     return HttpResponse(json.dumps({"result": result}))
@@ -81,8 +94,12 @@ def inserorderview(request):
 def delorderview(request):
     if request.method == "POST":
         ID=request.POST.get("view_id")
+
         orderview=Orderview.objects.get(id=ID)
         orderview.delete()
+
+
+
     return render(request, "home.html", locals())
 
 
@@ -448,6 +465,7 @@ def contactus(request):
             except:
                 hint = "郵件發送產生錯誤！"
             server.quit()
+            return redirect("/contactus")
 
         else:
             message='有欄位錯誤'

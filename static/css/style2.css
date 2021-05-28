@@ -219,7 +219,7 @@ input[type="number"] {
 
 input[type="submit"] {
     margin-top: 5%;
-    padding:15px 15px;
+
     border:1px black solid;
     cursor:pointer;
     -webkit-border-radius: 5px;

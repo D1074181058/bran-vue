@@ -42,8 +42,8 @@
         {% for unit in orderviewall %}
             <tr class="tb-td" name="list">
                 <td id="{{unit.id}}" name ="salename" >{{unit.salename}}</td>
-                <td name ="salenum" >{{unit.salenum}}</td>
-                <td name ="saleprice" >{{unit.saleprice}}</td>
+                <td  name ="salenum" >{{unit.salenum}}</td>
+                <td  name ="saleprice" >{{unit.saleprice}}</td>
                 <td><input type="button" name="del" onclick="del(this)" value="刪除"></td>
             </tr>
         {% endfor %}
@@ -70,50 +70,107 @@
     var totalprice=0
     var n =0
     var price = [];
-    for(i=0;i<tr_all.length;++i){
-     tr_all[i].id=i
+
+    for(let i=0;i<tr_all.length;++i){
+        tr_all[i].id = i
     }
-    for(i=0;i<inputall.length;++i) {
-            tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
-            price.push(tr_id_all[2].textContent)
-            inputall[i].id=i+1
-            totalprice += parseInt(price[i])
+
+    for(let i=0;i<inputall.length;++i) {
+        tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
+        price.push(tr_id_all[2].textContent)
+        inputall[i].id=i+1
+        totalprice += parseInt(price[i])
     }
 
     tr_id_all = document.querySelectorAll('tr[id="' + (inputall.length+1) + '"] > td')
     tr_id_all[1].textContent=totalprice
-    function del(val){
-        btn_id=val.id
-        tr_id_all=document.querySelectorAll('tr[id="' + btn_id + '"] > td')
+
+    function del(val) {
+        let btn_id = val.id
+        let tr_id_all = document.querySelectorAll('tr[id="' + btn_id + '"] > td')
+
+
         $.ajax({
-                        url: "/delorderview/",
-                        type: "POST",
-                         data: {
-                           "view_id":tr_id_all[0].id,
-                             csrfmiddlewaretoken: '{{ csrf_token }}',
-                         },success:function (data){
-                            location.reload();
-                        }
-                    })
+            url: "/delorderview/",
+            type: "POST",
+            data: {
+                "view_id":tr_id_all[0].id,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },success:function (data){
+                location.reload();
+            }
+        })
     }
-    function inserorder()
-    {
-    for (var i=0; i<tr_all.length; i++) {
-    tr_id_all=document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
+
+    function inserorder() {
+
+        var data = new Array();
+
+        for (var i=0; i<(tr_all.length-2); i++) {
+            data[i]=new Array();
+            for(var j=0;j<4;j++){
+                data[i][j] = "";
+            }
+        }
+        for (var i=0; i<(tr_all.length-2); i++) {
+            let tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
+            data[i][0]= tr_id_all[0].id;
+            data[i][1]= tr_id_all[0].textContent;
+            data[i][2]= tr_id_all[1].textContent;
+            data[i][3]= tr_id_all[2].textContent;
+        }
+
         $.ajax({
-                       url: "/inserorder/",
-                        type: "POST",
-                         data: {
-                             "view_id":tr_id_all[0].id,
-                             "unitname": tr_id_all[0].textContent,
-                             "unitnum": tr_id_all[1].textContent,
-                             "unitprice": tr_id_all[2].textContent,
-                             csrfmiddlewaretoken: '{{ csrf_token }}',
-                         },success:function (data){
-                            location.reload();
-                        }
-                    })
-                    }
+                url: "/inserorder/",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    data: JSON.stringify(data),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },success:function (data){
+                    alert("結帳成功");
+                    location.reload();
+                }
+            })
+       /*
+        $.ajax({
+                url: "/delorderview/",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    data: JSON.stringify(data),
+                    csrfmiddlewaretoken: ' csrf_token ',
+                },success:function (data){
+
+                }
+            })
+          */
+
+        /*
+        $.ajax({
+                url: "/inserorder/",
+                type: "POST",
+                data: {
+                    "view_id":tr_id_all[0].id,
+                    "unitname": tr_id_all[0].textContent,
+                    "unitnum": tr_id_all[1].textContent,
+                    "unitprice": tr_id_all[2].textContent,
+                    csrfmiddlewaretoken: 'csrf_token ',
+                },success:function (data){
+                    location.reload();
+                }
+            })
+            $.ajax({
+                url: "/delorderview/",
+                type: "POST",
+                data: {
+                    "view_id":tr_id_all[0].id,
+                    csrfmiddlewaretoken: ' csrf_token ',
+                },success:function (data){
+                    location.reload();
+                }
+            })
+        */
     }
 
 </script>

@@ -224,13 +224,13 @@ input {
 .poem{
     margin:auto;
    padding-left: 45%;
-    padding-right: 40%;
+    padding-right: 35%;
     margin-bottom: 0 ;
 
 text-align:center;
 font-size:130%;
 font-weight:bold;
-position: relative;
+
 height:100%;
 line-height:150%;
 

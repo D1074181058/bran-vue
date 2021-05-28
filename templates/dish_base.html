@@ -134,10 +134,63 @@
             var sales = document.querySelectorAll("#sales");
             var ex_1 = document.querySelectorAll("#ex-1");
             var saleprices = document.querySelectorAll("#saleprice");
+            var data = new Array();
+
+
             for (var i=0; i<ex_1.length; ++i) {
                 let unitnum = parseInt(ex_1[i].value);
                 if(!isNaN(unitnum) && unitnum !== 0){
-                    $.ajax({
+                    data[i]=new Array();
+                    for(var j=0;j<3;j++){
+                         data[i][j] = "";
+                    }
+
+                }
+            }
+
+            for (var i=0; i<ex_1.length; ++i) {
+               let unitnum = parseInt(ex_1[i].value);
+               if(!isNaN(unitnum) && unitnum !== 0){
+                   data[i][0]=sales[i].textContent;
+                   data[i][1]= ex_1[i].value;
+                   data[i][2]=saleprices[i].textContent;
+
+               }
+            }
+
+            $.ajax({
+                        url: "/inserorderview/",
+                        type: "POST",
+                        datatype: "json",
+                         data: {
+                             data: JSON.stringify(data),
+                             csrfmiddlewaretoken:  '{{  csrf_token }}' ,
+                         },success:function (data){
+                            alert("本頁訂購完成");
+                           window.location.reload();
+
+                        }
+            })
+
+
+            /*
+            data['unitname'][n]=sales[i].textContent;
+                    data['unitnum'][n] = ex_1[i].value;
+                    data['unitprice'][n]= sales[i].textContent;
+                    n+=1;
+            $.ajax({
+                        url: "/inserorderview/",
+                        type: "POST",
+                        datatype: "json",
+                         data: {
+                              data,
+                             csrfmiddlewaretoken: csrf_token
+                         },success:function (data){
+                            location.reload();
+                        }
+            })
+            */
+      /*$.ajax({
                         url: "/inserorderview/",
                         type: "POST",
                         datatype: "json",
@@ -145,14 +198,11 @@
                              "unitname": sales[i].textContent,
                              "unitnum": ex_1[i].value,
                              "unitprice": saleprices[i].textContent,
-                             csrfmiddlewaretoken: '{{ csrf_token }}',
+                             csrfmiddlewaretoken:  csrf_token ,
                          },success:function (data){
-                            alert("訂購成功");
                             location.reload();
                         }
-                    })
-          }
-      }
+                    })*/
   }
     </script>
 <script>
