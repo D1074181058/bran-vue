@@ -48,13 +48,13 @@ def inserorder(request):
         if request.method == "POST":
             account = request.session['account']
             name = member.objects.get(account=account).Name
-            datas = json.loads(request.POST.get("data"))
+            data = json.loads(request.POST.get("data"))
 
-            for data in datas:
-                unit = Order.objects.create(customname=name, customaccount=account, unitname=data[1],
-                                            unitnum=data[2], unitprice=data[3], nowtime=now)
+            for datum in data:
+                unit = Order.objects.create(customname=name, customaccount=account, unitname=datum[1],
+                                            unitnum=datum[2], unitprice=datum[3], nowtime=now)
                 unit.save()
-                orderview = Orderview.objects.get(id=data[0])
+                orderview = Orderview.objects.get(id=datum[0])
                 orderview.delete()
 
             result = 'true'
@@ -68,20 +68,20 @@ def inserorderview(request):
         if request.method == "POST":
             account = request.session['account']
             name = member.objects.get(account=account).Name
-            datas = json.loads(request.POST.get("data"))
+            data = json.loads(request.POST.get("data"))
 
-            for data in datas:
+            for datum in data:
                 result = 'true'
                 if data:
                     try:
-                        unit = Orderview.objects.get(customaccount=account, salename=data[0])
-                        unit.salenum = int(unit.salenum) + int(data[1])
-                        unit.saleprice = int(unit.saleprice) + int(data[2])
+                        unit = Orderview.objects.get(customaccount=account, salename=datum[0])
+                        unit.salenum = int(unit.salenum) + int(datum[1])
+                        unit.saleprice = int(unit.saleprice) + int(datum[2])
                     except Orderview.DoesNotExist:
 
                         unit = Orderview.objects.create(customname=name, customaccount=account,
-                                                        salename=data[0], salenum=data[1],
-                                                        saleprice=data[2])
+                                                        salename=datum[0], salenum=datum[1],
+                                                        saleprice=datum[2])
 
                     unit.save()
 
