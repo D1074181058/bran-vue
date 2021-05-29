@@ -72,7 +72,7 @@ def inserorderview(request):
 
             for datum in data:
                 result = 'true'
-                if data:
+                if datum:
                     try:
                         unit = Orderview.objects.get(customaccount=account, salename=datum[0])
                         unit.salenum = int(unit.salenum) + int(datum[1])
@@ -276,7 +276,7 @@ def signup(request):
                                 " ", "")
 
                             strSmtp = "smtp.gmail.com:587"
-                            strAccount = "4181062@gmail.com"
+                            strAccount = "4181058@gmail.com"
                             strPassword = "d1074181062"
 
                             content = "驗證碼:" + sic.s_str
@@ -444,14 +444,14 @@ def contactus(request):
             content = contactform.cleaned_data['content']
 
             strSmtp = "smtp.gmail.com:587"
-            strAccount = ""
-            strPassword = ""
+            strAccount = "4181062@gmail.com"
+            strPassword = "d1074181062"
 
             content = "建議人姓名 : " + Name + "\n"+"建議人電話 : " + phone + "\n"+"建議內容   :\n" + content + "\n"
             msg = MIMEText(content)
 
             msg["Subject"] = title
-            mailto = ""
+            mailto = "4181062@gmail.com"
 
             server = SMTP(strSmtp)
             server.ehlo()
