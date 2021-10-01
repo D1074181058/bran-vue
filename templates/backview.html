@@ -1,62 +1,62 @@
-<html>
-<head>
+{% extends "layout/app.html" %}
+{% block title %}
     <title>訂單管理</title>
+{% endblock %}
+{% block link %}
     {% load static %}
     <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css">
-</head>
-
-<body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<table border="1" style="padding:10px; background-color:#eee;" >
-<tr class="tb-td">
-                <td name ="customname" >訂購人姓名</td>
-                <td name ="unitname" >商品名稱</td>
-                <td name ="customnum" >商品數量</td>
-                <td name ="unitprice" >商品價格</td>
-                <td name ="nowtime" >訂購時間</td>
-</tr>
- {% for unit in orderall %}
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON"/>
+{% endblock %}
+{% block content %}
+    <table border="1" style="padding:10px; background-color:#eee;">
+        <tr class="tb-td">
+            <td name="customname">訂購人姓名</td>
+            <td name="unitname">商品名稱</td>
+            <td name="customnum">商品數量</td>
+            <td name="unitprice">商品價格</td>
+            <td name="nowtime">訂購時間</td>
+        </tr>
+        {% for unit in orderall %}
             <tr class="tb-td">
-                <td name ="customname" >{{unit.customname}}</td>
-                <td name ="unitname" >{{unit.unitname}}</td>
-                <td name ="unitnum" >{{unit.unitnum}}</td>
-                <td name ="unitprice" >{{unit.unitprice}}</td>
-                <td name ="nowtime" >{{unit.nowtime}}</td>
+                <td name="customname">{{ unit.customname }}</td>
+                <td name="unitname">{{ unit.unitname }}</td>
+                <td name="unitnum">{{ unit.unitnum }}</td>
+                <td name="unitprice">{{ unit.unitprice }}</td>
+                <td name="nowtime">{{ unit.nowtime }}</td>
                 <td><input type="button" name="del" onclick="del(this)" value="刪除"></td>
             </tr>
- {% endfor %}
-</table>
+        {% endfor %}
+    </table>
+{% endblock %}
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        tr_all = document.querySelectorAll('tr')
+        inputall = document.querySelectorAll('input[name="del"]')
+        for (i = 0; i < tr_all.length; ++i) {
+            tr_all[i].id = i
+            inputall[i].id = i + 1
+        }
 
-<script>
+        function del(val) {
+            btn_id = val.id
+            tr_id_all = document.querySelectorAll('tr[id="' + btn_id + '"] > td')
+            $.ajax({
+                url: "/delorder/",
+                type: "POST",
+                data: {
+                    "customname": tr_id_all[0].textContent,
+                    "unitname": tr_id_all[1].textContent,
+                    "unitnum": tr_id_all[2].textContent,
+                    "nowtime": tr_id_all[4].textContent,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                }, success: function (data) {
+                    location.reload();
+                }
+            })
+        }
 
-    tr_all=document.querySelectorAll('tr')
-    inputall=document.querySelectorAll('input[name="del"]')
-    for(i=0;i<tr_all.length;++i){
-        tr_all[i].id=i
-        inputall[i].id=i+1
-    }
-    function del(val){
-        btn_id=val.id
-        tr_id_all=document.querySelectorAll('tr[id="' + btn_id + '"] > td')
-        $.ajax({
-                        url: "/delorder/",
-                        type: "POST",
-                         data: {
-                            "customname": tr_id_all[0].textContent,
-                             "unitname": tr_id_all[1].textContent,
-                             "unitnum": tr_id_all[2].textContent,
-                             "nowtime": tr_id_all[4].textContent,
-                             csrfmiddlewaretoken: '{{ csrf_token }}',
-                         },success:function (data){
-                            location.reload();
-                        }
-                    })
-    }
-
-</script>
-</body>
-
-</html>
-
+    </script>
+{% endblock %}
 
 

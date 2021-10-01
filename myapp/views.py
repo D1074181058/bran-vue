@@ -27,6 +27,7 @@ def backview(request):
     i=0
     lis=[]
     orderall = Order.objects.all()
+
     for order in orderall:
         i+=1
         lis.append(i)
@@ -49,7 +50,6 @@ def inserorder(request):
             account = request.session['account']
             name = member.objects.get(account=account).Name
             data = json.loads(request.POST.get("data"))
-
             for datum in data:
                 unit = Order.objects.create(customname=name, customaccount=account, unitname=datum[1],
                                             unitnum=datum[2], unitprice=datum[3], nowtime=now)
@@ -134,7 +134,7 @@ def pig(request):
         message = request.session['account']+"已登入"
 
     now=datetime.now()
-    return render(request,"pig.html",locals())
+    return render(request,"dish/pig.html",locals())
 
 def beef(request):
     beefs=models.beefview.objects.all()
@@ -154,7 +154,7 @@ def beef(request):
 
 
     now=datetime.now()
-    return render(request,"beef.html",locals())
+    return render(request,"dish/beef.html",locals())
 def chicken(request):
     chickens = models.chickenview.objects.all()
     if 'account' in request.session:
@@ -168,7 +168,7 @@ def chicken(request):
         message = request.session['account']+"已登入"
 
     now=datetime.now()
-    return render(request,"chicken.html",locals())
+    return render(request,"dish/chicken.html",locals())
 def lamb(request):
     lambs=models.lambview.objects.all()
     if 'account' in request.session:
@@ -182,7 +182,7 @@ def lamb(request):
         message = request.session['account']+"已登入"
 
     now=datetime.now()
-    return render(request,"lamb.html",locals())
+    return render(request,"dish/lamb.html",locals())
 def seafood(request):
     seafoods=models.seafoodview.objects.all()
     if 'account' in request.session:
@@ -196,7 +196,7 @@ def seafood(request):
         message = request.session['account']+"已登入"
 
     now=datetime.now()
-    return render(request,"seafood.html",locals())
+    return render(request,"dish/seafood.html",locals())
 def agarigus(request):
     agaricuses=models.agaricusview.objects.all()
     if 'account' in request.session:
@@ -210,7 +210,7 @@ def agarigus(request):
         message = request.session['account']+"已登入"
 
     now=datetime.now()
-    return render(request,"agaricus.html",locals())
+    return render(request,"dish/agaricus.html",locals())
 def vegetables(request):
     vegetables=models.vegetableview.objects.all()
     if 'account' in request.session:
@@ -224,7 +224,7 @@ def vegetables(request):
         message = request.session['account']+"已登入"
 
     now=datetime.now()
-    return render(request,"vegetables.html",locals())
+    return render(request,"dish/vegetables.html",locals())
 
 
 class sic:

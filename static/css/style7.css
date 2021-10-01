@@ -1,0 +1,160 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #cfcfcf;
+}
+
+a {
+	text-decoration: none;
+	font-size: 16px;
+}
+
+h2 {
+	font-size: 24px;
+	font-weight: bold;
+	padding-left: 16px;
+	padding-top: 1em;
+}
+
+p {
+	line-height: 1.8;
+	padding: 1em;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	height: auto;
+	overflow: hidden;
+	position: relative;
+}
+
+.mobile_close,
+.mobile_open {
+	display: inline-block;
+	font-size: 16px;
+	padding: 1px;
+	color: #ffbe0b;
+	line-height: 50px;
+}
+
+.mobile_open {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.mobile_open {
+		display: inline-block;
+	}
+}
+
+.fas {
+	padding: 1em;
+}
+
+.aside {
+	overflow: hidden;
+	width: 270px;
+	background-color: #333;
+	transform: translateX(-270px);
+	position: absolute;
+	top: 0;
+	bottom: 0;
+}
+
+@media (max-width: 768px) {
+	.aside {
+		display: block;
+		border-right: 3px solid #ffbe0b;
+		transition: all 0.5s;
+	}
+
+	.aside li {
+		margin: 1em;
+	}
+
+	.aside li a {
+		display: block;
+		color: #ffbe0b;
+		border-bottom: 1px dashed #ffbe0b;
+		padding: 1em;
+	}
+
+	.aside li a:hover {
+		background-color: #ffbe0b;
+		color: #333;
+		transition: 0.3s;
+	}
+}
+
+.main {
+	transform: translateX(0px);
+	transition: all 0.5s;
+}
+
+.header {
+	background-color: #333;
+	height: 50px;
+	border-bottom: 3px solid #ffbe0b;
+}
+
+.header .menu {
+	float: right;
+	margin-right: 1em;
+}
+
+.header .menu li {
+	float: left;
+}
+
+.header .menu li a {
+	color: #ffbe0b;
+	font-size: 16px;
+	padding-right: 1em;
+	padding-left: 1em;
+	line-height: 50px;
+}
+
+.header .menu li a:hover {
+	background-color: #ffbe0b;
+	padding-top: 17px;
+	padding-bottom: 15px;
+	color: #333;
+	transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+	.header .menu {
+		display: none;
+		transition: all 0.5s;
+	}
+
+	.header .menu li {
+		float: left;
+	}
+
+	.header .menu li a {
+		display: block;
+		color: #ffbe0b;
+		line-height: 50px;
+		border-bottom: 1px dashed #ffbe0b;
+		transition: all 0.5s;
+	}
+
+	.header .menu li a:hover {
+		background-color: #ffbe0b;
+		color: #333;
+	}
+}
+
+.open .main {
+	transform: translateX(270px);
+	transition: all 0.5s;
+}
+
+.open .aside {
+	transform: translateX(0);
+	transition: all 0.5s;
+}

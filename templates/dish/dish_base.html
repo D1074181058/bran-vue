@@ -1,0 +1,178 @@
+{% extends "layout/app.html" %}
+{% block title %} {% endblock %}
+{% block link %}
+    {% load static %}
+    <link href="{% static "css/style2.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON"/>
+{% endblock %}
+{% block content %}
+    {% include 'layout/header.html' %}
+    <br/>
+    <ul class="drop-down-menu2">
+        <div style="text-align:center" class="nav-title">菜色種類</div>
+        <li><a href="/dish/beef">牛肉</a>
+        </li>
+        <li><a href="/dish/pig">豬肉</a>
+        </li>
+        <li><a href="/dish/chicken">雞肉</a>
+        </li>
+        <li><a href="/dish/lamb">羊肉</a>
+        </li>
+        <li><a href="/dish/seafood">海鮮</a>
+        </li>
+        <li><a href="/dish/vegetables">蔬菜</a>
+        </li>
+        <li><a href="/dish/agaricus">菇類</a>
+        </li>
+    </ul>
+    <div class="item"
+         style="overflow-y:scroll;display: flex;justify-content: center;align-items: flex-start;max-width: 1080px;">
+        <form method="POST" name="form_name">
+            {% block content_dish %} {% endblock %}
+        </form>
+    </div>
+    <div style="text-align: center;">
+        {% if log == 'login' %}
+            <input align="center" valign="center" onclick="my()" type="submit" name="button" id="button" value="確定">
+            {% if viewlen %}
+                <input align="center" valign="center" onclick="self.location.href='/sal_view'" type="submit"
+                       name="button" id="button" value="購物車({{ viewlen }})">
+            {% endif %}
+        {% else %}
+            <div style="margin-top:30px">
+                <font>尚未登入 還無法購買</font>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var cost_total = [];
+        var ex_1 = document.querySelectorAll("#ex-1");
+        var saleprices = document.querySelectorAll("#saleprice");
+        var re = /^[0-9]{1,2}$/;
+        for (var i = 0; i < ex_1.length; ++i) {
+            ex_1[i].oninput = function (e) {
+                if (e.target.value > 99)
+                    e.target.value = 99;
+                else if (!e.target.value.match(re))
+                    e.target.value = '';
+                else if (e.target.value < 0)
+                    e.target.value = 0;
+            }
+        }
+        for (var i = 0; i < saleprices.length; ++i) {
+            cost_total.push(saleprices[i].textContent)
+        }
+
+        function count() {
+            for (var i = 0; i < ex_1.length; ++i) {
+                let num = parseInt(ex_1[i].value)
+                if (!isNaN(num) && num !== 0) {
+                    var total = cost_total[i] * num;
+                    saleprices[i].textContent = total;
+                } else {
+                    var total = cost_total[i] * 1;
+                    saleprices[i].textContent = total;
+                }
+            }
+        }
+
+        function my() {
+            var sales = document.querySelectorAll("#sales");
+            var ex_1 = document.querySelectorAll("#ex-1");
+            var saleprices = document.querySelectorAll("#saleprice");
+            var data = new Array();
+
+
+            for (var i = 0; i < ex_1.length; ++i) {
+                let unitnum = parseInt(ex_1[i].value);
+                if (!isNaN(unitnum) && unitnum !== 0) {
+                    data[i] = new Array();
+                    for (var j = 0; j < 3; j++) {
+                        data[i][j] = "";
+                    }
+
+                }
+            }
+
+            for (var i = 0; i < ex_1.length; ++i) {
+                let unitnum = parseInt(ex_1[i].value);
+                if (!isNaN(unitnum) && unitnum !== 0) {
+                    data[i][0] = sales[i].textContent;
+                    data[i][1] = ex_1[i].value;
+                    data[i][2] = saleprices[i].textContent;
+
+                }
+            }
+
+            $.ajax({
+                url: "/inserorderview/",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    data: JSON.stringify(data),
+                    csrfmiddlewaretoken: '{{  csrf_token }}',
+                }, success: function (data) {
+                    alert("本頁訂購完成");
+                    window.location.reload();
+
+                }
+            })
+
+
+            /*
+            data['unitname'][n]=sales[i].textContent;
+                    data['unitnum'][n] = ex_1[i].value;
+                    data['unitprice'][n]= sales[i].textContent;
+                    n+=1;
+            $.ajax({
+                        url: "/inserorderview/",
+                        type: "POST",
+                        datatype: "json",
+                         data: {
+                              data,
+                             csrfmiddlewaretoken: csrf_token
+                         },success:function (data){
+                            location.reload();
+                        }
+            })
+            */
+            /*$.ajax({
+                              url: "/inserorderview/",
+                              type: "POST",
+                              datatype: "json",
+                               data: {
+                                   "unitname": sales[i].textContent,
+                                   "unitnum": ex_1[i].value,
+                                   "unitprice": saleprices[i].textContent,
+                                   csrfmiddlewaretoken:  csrf_token ,
+                               },success:function (data){
+                                  location.reload();
+                              }
+                          })*/
+        }
+    </script>
+    <script>
+
+
+        function logout() {
+
+            $.ajax({
+                url: "/logout/",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    srfmiddlewaretoken: '{{ csrf_token }}',
+                }, success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    location.reload();
+                }
+
+            })
+
+        }
+    </script>
+{% endblock %}

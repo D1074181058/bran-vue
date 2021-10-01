@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^infodetail/(\d+)/$',views.infodetail),
 
     url(r'^contactus/',views.contactus),
+
     url(r'^aboutus/',views.aboutus),
 
 
@@ -45,8 +46,11 @@ urlpatterns = [
     url(r'^signup/em_cap/$',views.em_cap),
 
     url(r'^login/',views.login),
+
     url(r'^captcha/',include('captcha.urls')),
+
     url(r'^logout/',views.logout),
+
     url(r'^hlogout/',views.hlogout),
 
 
@@ -59,7 +63,7 @@ urlpatterns = [
 
 
 
-    url(r'^0',views.test),
+    url(r'^0/',views.test),
 
     #url(r'^login1/$',views.login1),
     #url(r'^login2/$',views.login2),

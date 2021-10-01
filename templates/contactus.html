@@ -1,137 +1,72 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends "layout/app.html" %}
+{% block title %}
     <title>聯絡我們</title>
+{% endblock %}
+{% block link %}
     {% load static %}
-    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
-    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON" />
-</head>
-<body style="background-color:PapayaWhip">
-<div style="text-align:right">
-    {% if log == 'login' %}
-     {{ message }}
-    <a>/</a>
-    <a href="/logout">登出</a>
-    {% else %}
-    <a href="/login">登入</a>
-    <a>/</a>
-    <a href="/signup">註冊</a>
-    {% endif %}
-</div>
-<div>
-<div class="_left">
-    <span style="vertical-align:middle">
-    <a href="/">
-        <img  src="{% static "images/招牌.png" %}" />
-    </a>
-    </span>
-     <ul class="drop-down-menu" >
-        <li><a href="/aboutus">品牌</a>
-        </li>
-        <li><a href="/newinfo">最新消息</a>
-        </li>
-        <li><a href="">菜色種類</a>
-            <ul>
-                <li><a href="/dish/beef">牛肉</a>
-                </li>
-                <li><a href="/dish/pig">豬肉</a>
-                </li>
-                <li><a href="/dish/chicken">雞肉</a>
-                </li>
-                <li><a href="/dish/lamb">羊肉</a>
-                </li>
-                <li><a href="/dish/seafood">海鮮</a>
-                </li>
-                <li><a href="/dish/vegetables">蔬菜</a>
-                </li>
-                <li><a href="/dish/agaricus">菇類</a>
-                </li>
-            </ul>
-        </li>
-        <li><a href="/contactus">聯絡我們</a>
-        </li>
-     </ul>
-</div>
-</div>
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON"/>
+    <style>
+        html, body {
+            height: unset;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    {% include 'layout/header.html' %}
+    <div class="contactus-all">
+        <p style="text-align:center;font-size:200%;"><b>聯絡資訊</b></p>
+        <div style="display: flex;    flex-wrap: wrap;">
+            <div class="contactus-lab" style="background-color:NavajoWhite;">
+                <table>
+                    <tr>
+                        <th>店面地址 :</th>
+                        <td>新北市泰山區明志路一段164號</td>
+                    </tr>
 
-<div class="contactus-all" style="padding:20px 20px 20px 20px;background-color:NavajoWhite;">
-    <p style="text-align:center;font-size:200%;"><b>聯絡資訊</b></p>
-     <div class="contactus-lab" style="background-color:NavajoWhite;">
-        <table >
-                <tr>
-                    <th>店面地址 :</th><td>新北市泰山區明志路一段164號</td>
-                </tr>
+                    <tr>
+                        <th>連絡電話 :</th>
+                        <td>2909-0855</td>
+                    </tr>
+                    <tr>
+                        <th>營業時間 :</th>
+                        <td>周一至周六 下午 5 點 至 晚上 12 點 周日公休</td>
+                    </tr>
+                    <tr>
+                        <th>聯絡信箱 :</th>
+                        <td>wiwi19991214@gmail.com</td>
+                    </tr>
 
-                <tr>
-                    <th>連絡電話 :</th><td>2909-0855</td>
-                </tr>
-                <tr>
-                    <th>營業時間 :</th><td>周一至周六 下午 5 點 至 晚上 12 點  周日公休</td>
-                </tr>
-                <tr>
-                    <th>聯絡信箱 :</th><td>wiwi19991214@gmail.com </td>
-                </tr>
+                </table>
 
-        </table>
+                <div class="contactus-bottom">
+                    <b>有任何問題請填寫旁邊建議內容， 我們將儘快與您聯絡，謝謝</b>
 
-         <div class="contactus-bottom">
-             <b>有任何問題請填寫旁邊建議內容， 我們將儘快與您聯絡，謝謝</b>
-
+                </div>
+            </div>
+            <div class="contact-1" style="background-color:NavajoWhite;">
+                <form action="." method="POST" name="form1">
+                    {% csrf_token %}
+                    <div class="contact-content" style="text-align:right;width: 100%;">
+                        <div class="contact-text"
+                             style="display: flex;flex-direction: column;align-items: flex-end;align-content: space-around;flex-wrap: wrap;">
+                            <div>
+                                <label>姓名 </label>{{ contactform.Name }}
+                            </div>
+                            <div>
+                                <label>連絡電話 </label>{{ contactform.phone }}
+                            </div>
+                            <div>
+                                <label>主旨 </label>{{ contactform.title }}
+                            </div>
+                            <div>
+                                <b>建議內容 </b>{{ contactform.content }}
+                            </div>
+                            <input type="submit" name="button" id="button" value="送出">
+                        </div>
+                </form>
+                <span style="color: red"></span>
+            </div>
         </div>
     </div>
-
-
-
-    <div class="contact-1" style="background-color:NavajoWhite;">
-        <form action="." method="POST" name="form1">
-            {% csrf_token %}
-             <div class="contact-content" style="text-align:right;">
-              <div>
-                    姓名
-              </div>
-                <div>
-                    連絡電話
-                </div>
-              <div>
-                    主旨
-              </div>
-
-            <div>
-                <b >建議內容 </b>
-            </div>
-
-             </div>
-
-
-            <div class="contact-text">
-            <div  >
-                    {{ contactform.Name }}
-              </div>
-                <div>
-                    {{ contactform.phone }}
-                </div>
-              <div>
-                   {{ contactform.title }}
-              </div>
-            <div>
-                {{ contactform.content }}
-            </div>
-                 <div style="margin-left:60%;text-align:center;" >
-              <input type="submit" name="button" id="button" value="送出">
-            </div>
-          </div>
-        </form>
-        <span style="color: red"></span>
-    </div>
-
-</div>
-<div class="contact-footer">
-       &copy;Copyright 2021 Pang Ger 胖哥燒烤
-    </div>
-
-</body>
-</html>
+{% endblock %}

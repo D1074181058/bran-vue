@@ -1,45 +1,40 @@
+.sitebody {
+    width: 95%;
+    height: 95%;
+    margin: 0 auto;
+    font-size: 13px;
+}
 
-.sitebody{
-    width:95%;
-    height:95%;
-margin: 0 auto;
-font-size:13px;
+.header {
+    background-color: #FFD4D4;
+    height: 10%;
+    text-align: center;
+    line-height: 80px;
 }
-.header{
-background-color:#FFD4D4;
-height:10%;
-text-align:center;
-line-height:80px;
-}
-.sidebar_left{
-background-color:#FFECC9;
-width:10%;
-height:85%;
-text-align:center;
-line-height:400px;
-float:left;
-}
-.sidebar_right{
 
-background-color:#FFECC9;
-width:10%;
-height:85%;
-text-align:center;
-line-height:400px;
-float:right;
+.sidebar_left {
+    background-color: #FFECC9;
+    width: 10%;
+    height: 85%;
+    text-align: center;
+    line-height: 400px;
+    float: left;
 }
-.content{
-margin-left:12%;
-margin-right:12%;
-height:80%;
-background-color:#F2FFF2;
-text-align:center;
-line-height:400px;
+
+.sidebar_right {
+    background-color: #FFECC9;
+    width: 10%;
+    height: 85%;
+    text-align: center;
+    line-height: 400px;
+    float: right;
 }
-.footer{
-    clear:both;
-background-color:#FFD4D4;
-height:10%;
-text-align:center;
-line-height:80px;
+
+.content {
+    margin-left: 12%;
+    margin-right: 12%;
+    height: 80%;
+    background-color: #F2FFF2;
+    text-align: center;
+    line-height: 400px;
 }

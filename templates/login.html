@@ -1,66 +1,67 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends "layout/app.html" %}
+{% block title %}
     <title>登入</title>
+{% endblock %}
+{% block link %}
     {% load static %}
-    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" >
-    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON" />
-</head>
-<body style="background-color:PapayaWhip">
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON"/>
+{% endblock %}
+{% block content %}
 <div class="_log" style="background-color:White;">
-    <div style="margin-top:5%;">
-    <span style="">
-        <a href="/">
-        <img  style="width:30%;height:100%;margin-left: 35%;margin-right: 40%" src="{% static "images/招牌.png" %}"  />
-        </a>
-    </span>
+    <div style="margin-top:20px;text-align: center;">
+        <span style="">
+            <a href="/">
+            <img style="width:50%;" src="{% static "images/招牌.png" %}"/>
+            </a>
+        </span>
     </div>
-<div style="margin-top:10%;margin-bottom:5%;margin-left:auto;margin-right:auto;">
-     <form action="/login/" method="POST" name="form1">
-      {% csrf_token %}
-      {% if log == 'login' %}
-          <div style="text-align: center">用戶已登入，返回<a href="/">首頁</a></div>
-          <div style="text-align: center"><a href="/logout">登出</a></div>
-      {% else %}
-        <table >
-          <tr>
-              <th>帳號</th><td>{{ inform.account }}</td>
-          </tr>
-          <tr>
-              <th></th><td style="color: red">{{ inform.account.errors }}{{ message }}</td>
-          </tr>
-          <tr>
-              <th>密碼</th><td>{{ inform.password }}</td>
-          </tr>
-          <tr>
-              <th></th><td style="color: red">{{ inform.password.errors }}{{ pa_message }}</td>
-          </tr>
-          <tr class="cap">
-              <th>驗證碼</th><td>{{ inform.captcha }}</td>
-          </tr>
-            {%   if inform.captcha.errors %}
-                <tr>
-                    <th></th><td style="color: red">驗證碼錯誤</td>
-                </tr>
+    <div style="margin: 30px auto 5%;">
+        <form action="/login/" method="POST" name="form1">
+            {% csrf_token %}
+            {% if log == 'login' %}
+                <div style="text-align: center">用戶已登入，返回<a href="/">首頁</a></div>
+                <div style="text-align: center"><a href="/logout">登出</a></div>
+            {% else %}
+                <table>
+                    <tbody style="display: flex;flex-direction: column;align-items: center;">
+                        <tr>
+                            <th>帳號</th>
+                            <td>{{ inform.account }}</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td style="color: red">{{ inform.account.errors }}{{ message }}</td>
+                        </tr>
+                        <tr>
+                            <th>密碼</th>
+                            <td>{{ inform.password }}</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td style="color: red">{{ inform.password.errors }}{{ pa_message }}</td>
+                        </tr>
+                        <tr style="display: flex;flex-direction: row;align-content: center;align-items: center;">
+                            <th>驗證碼</th>
+                            <td style="width: 200px;display: flex;">{{ inform.captcha }}</td>
+                        </tr>
+                        {% if inform.captcha.errors %}
+                            <tr>
+                                <th></th>
+                                <td style="color: red">驗證碼錯誤</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <div style="margin-top:20px;text-align: center;">
+                    <input type="submit" name="button" id="button" value="送出">
+                    <input type="reset" name="button2" id="button2" value="重設">
+                </div>
             {% endif %}
-
-
-
-      </table>
-          <div style="margin-top:8%;margin-bottom:5%;margin-left:38%;">
-              <input type="submit" name="button" id="button" value="送出">
-              <input type="reset" name="button2" id="button2" value="重設">
-          </div>
-      {% endif %}
-      </form>
-</div>
+        </form>
+    </div>
 
 
 </div>
 <span style="color: red"></span>
-</body>
-</html>
+{% endblock %}

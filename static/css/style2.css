@@ -1,256 +1,176 @@
-ul { /* 取消ul預設的內縮及樣式 */
-        margin: 0;
-        padding: 0;
-        list-style: none;
+ul.drop-down-menu2 {
 
-    }
- ul.drop-down-menu {
-
-        display: inline-block;
-        font-family: 'Open Sans', Arial, sans-serif;
-        font-size: 13px;
-    }
-
-    ul.drop-down-menu li {
-        position: relative;
-        white-space: nowrap;
-        border-right: #ccc 1px solid;
-
-    }
-
-    ul.drop-down-menu > li:last-child {
-        border-right: none;
-    }
-
-    ul.drop-down-menu > li {
-        float: left; /* 只有第一層是靠左對齊*/
-
-    }
-
-     ul.drop-down-menu a {
-        background-color: PapayaWhip;
-        color: #333;
-        display: block;
-        padding: 0 30px;
-        text-decoration: none;
-        line-height: 40px;
-
-    }
-    ul.drop-down-menu a:hover { /* 滑鼠滑入按鈕變色*/
-        color: #ef5c28;
-         -webkit-transition:color 0.5s;
-    }
-    ul.drop-down-menu li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
-       color: #ef5c28;
-         -webkit-transition:color 0.5s;
-    }
-      ul.drop-down-menu ul {
-        border: #ccc 1px solid;
-        position: absolute;
-        z-index: 99;
-        left: -1px;
-        top: 100%;
-       min-width: 180px;
-    }
-
-    ul.drop-down-menu ul li {
-        border-bottom: #ccc 1px solid;
-    }
-
-    ul.drop-down-menu ul li:last-child {
-        border-bottom: none;
-    }
-
-    ul.drop-down-menu ul ul { /*第三層以後的選單出現位置與第二層不同*/
-        z-index: 999;
-        top: 10px;
-        left: 90%;
-    }
-     ul.drop-down-menu ul { /*隱藏次選單*/
-        display: none;
-    }
-
-    ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
-        display: block;
-    }
-
-
-    ul.drop-down-menu2 {
-
-        display: inline-block;
-        font-family: 'Open Sans', Arial, sans-serif;
-        font-size: 13px;
-        float:left;
-    }
-
-    ul.drop-down-menu2 li {
-        position: relative;
-        white-space: nowrap;
-        border-top: #ccc 1px solid;
-    }
-
-    ul.drop-down-menu2 > li:last-child {
-        border-right: none;
-    }
-
-    ul.drop-down-menu2 > li {
-text-align:center
-
-    }
-
-     ul.drop-down-menu2 a {
-        background-color: PapayaWhip;
-        color: #333;
-        display: block;
-        padding: 0 30px;
-        text-decoration: none;
-        line-height: 40px;
-
-    }
-    ul.drop-down-menu2 a:hover { /* 滑鼠滑入按鈕變色*/
-        color: #ef5c28;
-         -webkit-transition:color 0.5s;
-    }
-    ul.drop-down-menu2 li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
-        color: #ef5c28;
-         -webkit-transition:color 0.5s;
-    }
-      ul.drop-down-menu2 ul {
-        border: #ccc 1px solid;
-        position: absolute;
-        z-index: 99;
-        left: -1px;
-        top: 100%;
-       min-width: 180px;
-    }
-
-    ul.drop-down-menu2 ul li {
-        border-bottom: #ccc 1px solid;
-    }
-
-    ul.drop-down-menu2 ul li:last-child {
-        border-bottom: none;
-    }
-
-    ul.drop-down-menu2 ul ul { /*第三層以後的選單出現位置與第二層不同*/
-        z-index: 999;
-        top: 10px;
-        left: 90%;
-    }
-     ul.drop-down-menu2 ul { /*隱藏次選單*/
-        display: none;
-    }
-
-    ul.drop-down-menu2 li:hover > ul { /* 滑鼠滑入展開次選單*/
-        display: block;
-    }
-    .nav-title{
-        background-color: #ef5c28;
-        width:90px;
-        height:30px;
-        border-style:double;
-        border-width:3px;
-        border-color:black;
-    }
-
-.item{
-margin-left:12%;
-margin-right:12%;
-height:100%;
-
-line-height:50px;
+    display: inline-block;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 13px;
+    float: left;
 }
-.item div {
-width:30%;
-    height:40%;
 
-color: #ef5c28;
-    text-align:center;
-float:left;
+ul.drop-down-menu2 li {
+    position: relative;
+    white-space: nowrap;
+    border-top: #ccc 1px solid;
 }
-.item div img{
 
-width:50%;
-height:60%;
+ul.drop-down-menu2 > li:last-child {
+    border-right: none;
 }
-.item div div{
-width:100%
-}
-.item div div table{
 
-margin-left:auto;
-margin-right:auto;
+ul.drop-down-menu2 > li {
+    text-align: center
 
 }
 
+ul.drop-down-menu2 a {
+    background-color: PapayaWhip;
+    color: #333;
+    display: block;
+    padding: 0 30px;
+    text-decoration: none;
+    line-height: 40px;
 
-.sidebar_left{
-background-color:#FFECC9;
-width:10%;
-height:100%;
-text-align:center;
-line-height:400px;
-float:left;
 }
 
-._left{
-width:100%;
-height:15%;
+ul.drop-down-menu2 a:hover { /* 滑鼠滑入按鈕變色*/
+    color: #ef5c28;
+    -webkit-transition: color 0.5s;
 }
-._left a{
-    text-decoration:none;
+
+ul.drop-down-menu2 li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
+    color: #ef5c28;
+    -webkit-transition: color 0.5s;
 }
-._left a img {
+
+ul.drop-down-menu2 ul {
+    border: #ccc 1px solid;
+    position: absolute;
+    z-index: 99;
+    left: -1px;
+    top: 100%;
+    min-width: 180px;
+}
+
+ul.drop-down-menu2 ul li {
+    border-bottom: #ccc 1px solid;
+}
+
+ul.drop-down-menu2 ul li:last-child {
+    border-bottom: none;
+}
+
+ul.drop-down-menu2 ul ul { /*第三層以後的選單出現位置與第二層不同*/
+    z-index: 999;
+    top: 10px;
+    left: 90%;
+}
+
+ul.drop-down-menu2 ul { /*隱藏次選單*/
+    display: none;
+}
+
+ul.drop-down-menu2 li:hover > ul { /* 滑鼠滑入展開次選單*/
+    display: block;
+}
+
+.nav-title {
+    background-color: #ef5c28;
+    width: 90px;
+    height: 30px;
+    border-style: double;
+    border-width: 3px;
+    border-color: black;
+}
+
+.food {
     width:30%;
-    height:100%;
-    margin-right: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.food div input{
+    width: 19%;
 }
 
+
+.item {
+    margin: auto;
+    max-height: 500px;
+    line-height: 50px;
+}
+
+@media screen and (max-width: 640px) {
+    .item {
+        max-height: 340px;
+    }
+}
+
+.item div {
+    margin: 10px;
+    height: 40%;
+    color: #ef5c28;
+    text-align: center;
+    float: left;
+}
+
+@media screen and (max-width: 640px) {
+    .item div {
+        width: 100%;
+        float: unset;
+        margin: 10px auto;
+    }
+}
+
+.item div img {
+    width: 150px;
+    height: 150px;
+}
+
+.item div div {
+    width: 100%
+}
+
+.item div div table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebar_left {
+    background-color: #FFECC9;
+    width: 10%;
+    height: 100%;
+    text-align: center;
+    line-height: 400px;
+    float: left;
+}
 
 input[type="number"] {
-    padding:5px 5px;
-    border:1px black solid;
-    cursor:pointer;
+    padding: 5px 5px;
+    border: 1px black solid;
+    cursor: pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    width:60%;
-    height:100%;
+    width: 40px;
+    height: 100%;
 }
 
 input[type="submit"] {
-    margin-top: 5%;
-    padding:15px 15px;
-
-    border:1px black solid;
-    cursor:pointer;
+    margin-top: 30px;
+    padding: 15px 15px;
+    border: 1px black solid;
+    cursor: pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    width:8%;
-    height:5%;
-
 }
 
-#button:hover{
-      background-color:red;
-     -webkit-transition:color 3s;
+#button:hover {
+    background-color: red;
+    -webkit-transition: color 3s;
 }
-#footer {
-	font-size: 12px;
-	padding: 15px 10px;
-	clear: both;
 
-	margin-bottom: 20px;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	-moz-border-radius-bottomright: 10px;
-	-moz-border-radius-bottomleft: 10px;
-	text-shadow: 1px 1px 1px #CCC;
-	text-align: center;
-}
 input[name='del'] {
-    padding:15px 15px;
-    border:1px black solid;
-    cursor:pointer;
+    padding: 15px 15px;
+    border: 1px black solid;
+    cursor: pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }

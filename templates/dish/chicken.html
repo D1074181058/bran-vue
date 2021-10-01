@@ -1,0 +1,17 @@
+{% extends "dish/dish_base.html" %}
+{% load static %}
+{% block title %}
+    <title>菜單-雞肉</title>
+{% endblock %}
+{% block content_dish %}
+    {% for chicken in chickens %}
+        <div class="food">
+            <img src="/static/images/雞/{{ chicken.imgname }}.jpg"/>
+            <font id='sales'>{{ chicken.salename }}</font>
+            <div>
+                <font>數量</font><input type="number" name="number" onchange="count()" id='ex-1' placeholder="1-99">
+                $<font id="saleprice" name="num">{{ chicken.saleprice }}</font>元
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

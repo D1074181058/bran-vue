@@ -1,177 +1,173 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% load static %}
-    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
+{% extends "layout/app.html" %}
+{% block title %}
     <title>購物車</title>
-</head>
-<body style="background-color:PapayaWhip">
-<div style="text-align:right">
-    {% if log == 'login' %}
-     {{ message }}
-    <a>/</a>
-    <a href="/logout">登出</a>
-    {% else %}
-    <a href="/login">登入</a>
-    <a>/</a>
-    <a href="/signup">註冊</a>
-    {% endif %}
-</div>
-<div>
-<div class="_left">
+{% endblock %}
+{% block link %}
+    {% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON"/>
+{% endblock %}
+{% block content %}
+    <div style="text-align:right">
+        {% if log == 'login' %}
+            {{ message }}
+            <a>/</a>
+            <a href="/logout">登出</a>
+        {% else %}
+            <a href="/login">登入</a>
+            <a>/</a>
+            <a href="/signup">註冊</a>
+        {% endif %}
+    </div>
+    <div>
+    <div class="_left">
     <span style="vertical-align:middle">
     <a href="/">
-        <img  src="{% static "images/招牌.png" %}" />
+        <img src="{% static "images/招牌.png" %}"/>
     </a>
     </span>
-    <font size="40"> {{account}} 的購物車 </font>
-
-
-</div>
-{% if orderviewall %}
-    <table border="1" style="padding:10px; background-color:#eee;"  >
-           <tr class="tb-td" name="list">
-                <td name ="salename" >商品名稱</td>
-                <td name ="salenum" >商品數量</td>
-                <td name ="saleprice" >商品價格</td>
-            </tr>
-        {% for unit in orderviewall %}
+        <font style="font-size: 32px;"> {{ account }} 的購物車 </font>
+    </div>
+    {% if orderviewall %}
+        <table border="1" style="padding:10px; background-color:#eee;">
             <tr class="tb-td" name="list">
-                <td id="{{unit.id}}" name ="salename" >{{unit.salename}}</td>
-                <td  name ="salenum" >{{unit.salenum}}</td>
-                <td  name ="saleprice" >{{unit.saleprice}}</td>
-                <td><input type="button" name="del" onclick="del(this)" value="刪除"></td>
+                <td name="salename">商品名稱</td>
+                <td name="salenum">商品數量</td>
+                <td name="saleprice">商品價格</td>
             </tr>
-        {% endfor %}
+            {% for unit in orderviewall %}
+                <tr class="tb-td" name="list">
+                    <td id="{{ unit.id }}" name="salename">{{ unit.salename }}</td>
+                    <td name="salenum">{{ unit.salenum }}</td>
+                    <td name="saleprice">{{ unit.saleprice }}</td>
+                    <td><input type="button" name="del" onclick="del(this)" value="刪除"></td>
+                </tr>
+            {% endfor %}
             <tr class="tb-td" name="list">
-               <td> 總價</td>
+                <td> 總價</td>
                 <td></td>
-             </tr>
-    </table>
-    <div style="text-align:center;margin-top:10%">
-        <input align="center" valign="center" onclick="inserorder()" type="submit" name="button" id="button" value="結帳">
-        <input align="center" valign="center"  onclick="javascript:history.back(-1);" type="submit" name="button" id="button" value="繼續購物">
-    </div>
-{% else %}
-    <div style="text-align:center">
-    <font >尚無資料</font>
-    </div>
-{% endif %}
+            </tr>
+        </table>
+        <div style="text-align:center;margin-top:20px;">
+            <input align="center" valign="center" onclick="inserorder()" type="submit" name="button" id="button"
+                   value="結帳">
+            <input align="center" valign="center" onclick="javascript:history.back(-1);" type="submit" name="button"
+                   id="button" value="繼續購物">
+        </div>
+    {% else %}
+        <div style="text-align:center">
+            <font>尚無資料</font>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        tr_all = document.querySelectorAll('tr')
+        inputall = document.querySelectorAll('input[name="del"]')
+        var totalprice = 0
+        var n = 0
+        var price = [];
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    tr_all=document.querySelectorAll('tr')
-    inputall=document.querySelectorAll('input[name="del"]')
-    var totalprice=0
-    var n =0
-    var price = [];
-
-    for(let i=0;i<tr_all.length;++i){
-        tr_all[i].id = i
-    }
-
-    for(let i=0;i<inputall.length;++i) {
-        tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
-        price.push(tr_id_all[2].textContent)
-        inputall[i].id=i+1
-        totalprice += parseInt(price[i])
-    }
-
-    tr_id_all = document.querySelectorAll('tr[id="' + (inputall.length+1) + '"] > td')
-    tr_id_all[1].textContent=totalprice
-
-    function del(val) {
-        let btn_id = val.id
-        let tr_id_all = document.querySelectorAll('tr[id="' + btn_id + '"] > td')
-
-
-        $.ajax({
-            url: "/delorderview/",
-            type: "POST",
-            data: {
-                "view_id":tr_id_all[0].id,
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-            },success:function (data){
-                location.reload();
-            }
-        })
-    }
-
-    function inserorder() {
-
-        var data = new Array();
-        for (var i=0; i<(tr_all.length-2); i++) {
-            data[i]=new Array();
-            for(var j=0;j<4;j++){
-                data[i][j] = "";
-            }
-        }
-        for (var i=0; i<(tr_all.length-2); i++) {
-            let tr_id_all = document.querySelectorAll('tr[id="' + (i+1) + '"] > td')
-            data[i][0]= tr_id_all[0].id;
-            data[i][1]= tr_id_all[0].textContent;
-            data[i][2]= tr_id_all[1].textContent;
-            data[i][3]= tr_id_all[2].textContent;
+        for (let i = 0; i < tr_all.length; ++i) {
+            tr_all[i].id = i
         }
 
-        $.ajax({
+        for (let i = 0; i < inputall.length; ++i) {
+            tr_id_all = document.querySelectorAll('tr[id="' + (i + 1) + '"] > td')
+            price.push(tr_id_all[2].textContent)
+            inputall[i].id = i + 1
+            totalprice += parseInt(price[i])
+        }
+
+        tr_id_all = document.querySelectorAll('tr[id="' + (inputall.length + 1) + '"] > td')
+        tr_id_all[1].textContent = totalprice
+
+        function del(val) {
+            let btn_id = val.id
+            let tr_id_all = document.querySelectorAll('tr[id="' + btn_id + '"] > td')
+
+
+            $.ajax({
+                url: "/delorderview/",
+                type: "POST",
+                data: {
+                    "view_id": tr_id_all[0].id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                }, success: function (data) {
+                    location.reload();
+                }
+            })
+        }
+
+        function inserorder() {
+
+            var data = new Array();
+            for (var i = 0; i < (tr_all.length - 2); i++) {
+                data[i] = new Array();
+                for (var j = 0; j < 4; j++) {
+                    data[i][j] = "";
+                }
+            }
+            for (var i = 0; i < (tr_all.length - 2); i++) {
+                let tr_id_all = document.querySelectorAll('tr[id="' + (i + 1) + '"] > td')
+                data[i][0] = tr_id_all[0].id;
+                data[i][1] = tr_id_all[0].textContent;
+                data[i][2] = tr_id_all[1].textContent;
+                data[i][3] = tr_id_all[2].textContent;
+            }
+
+            $.ajax({
                 url: "/inserorder/",
                 type: "POST",
                 datatype: "json",
                 data: {
                     data: JSON.stringify(data),
                     csrfmiddlewaretoken: '{{ csrf_token }}',
-                },success:function (data){
+                }, success: function (data) {
                     alert("結帳成功");
                     location.reload();
                 }
             })
-       /*
-        $.ajax({
-                url: "/delorderview/",
-                type: "POST",
-                datatype: "json",
-                data: {
-                    data: JSON.stringify(data),
-                    csrfmiddlewaretoken: ' csrf_token ',
-                },success:function (data){
+            /*
+             $.ajax({
+                     url: "/delorderview/",
+                     type: "POST",
+                     datatype: "json",
+                     data: {
+                         data: JSON.stringify(data),
+                         csrfmiddlewaretoken: ' csrf_token ',
+                     },success:function (data){
 
-                }
-            })
-          */
+                     }
+                 })
+               */
 
-        /*
-        $.ajax({
-                url: "/inserorder/",
-                type: "POST",
-                data: {
-                    "view_id":tr_id_all[0].id,
-                    "unitname": tr_id_all[0].textContent,
-                    "unitnum": tr_id_all[1].textContent,
-                    "unitprice": tr_id_all[2].textContent,
-                    csrfmiddlewaretoken: 'csrf_token ',
-                },success:function (data){
-                    location.reload();
-                }
-            })
+            /*
             $.ajax({
-                url: "/delorderview/",
-                type: "POST",
-                data: {
-                    "view_id":tr_id_all[0].id,
-                    csrfmiddlewaretoken: ' csrf_token ',
-                },success:function (data){
-                    location.reload();
-                }
-            })
-        */
-    }
-
-</script>
-</body>
-</html>
+                    url: "/inserorder/",
+                    type: "POST",
+                    data: {
+                        "view_id":tr_id_all[0].id,
+                        "unitname": tr_id_all[0].textContent,
+                        "unitnum": tr_id_all[1].textContent,
+                        "unitprice": tr_id_all[2].textContent,
+                        csrfmiddlewaretoken: 'csrf_token ',
+                    },success:function (data){
+                        location.reload();
+                    }
+                })
+                $.ajax({
+                    url: "/delorderview/",
+                    type: "POST",
+                    data: {
+                        "view_id":tr_id_all[0].id,
+                        csrfmiddlewaretoken: ' csrf_token ',
+                    },success:function (data){
+                        location.reload();
+                    }
+                })
+            */
+        }
+    </script>
+{% endblock %}

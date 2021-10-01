@@ -1,120 +1,57 @@
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% extends "layout/app.html" %}
+{% block title %}
     <title>品牌故事</title>
+{% endblock %}
+{% block link %}
     {% load static %}
-    <link href="{% static "css/style5.css" %}" rel="stylesheet" type="text/css" />
-    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON" />
-</head>
-<body style="background-color:PapayaWhip;max-height:5000px">
-<div style="text-align:right">
-    {% if log == 'login' %}
-     {{ message }}
-    <a>/</a>
-    <a href="/logout">登出</a>
-    {% else %}
-    <a href="/login">登入</a>
-    <a>/</a>
-    <a href="/signup">註冊</a>
-    {% endif %}
-</div>
-<div>
-<div class="_left">
-    <span style="vertical-align:middle">
-    <a href="/">
-        <img  src="{% static "images/招牌.png" %}" />
-    </a>
-    </span>
-     <ul class="drop-down-menu" >
-        <li><a href="/aboutus">品牌</a>
-        </li>
-        <li><a href="/newinfo">最新消息</a>
-        </li>
-        <li><a href="">菜色種類</a>
-            <ul>
-                <li><a href="/dish/beef">牛肉</a>
-                </li>
-                <li><a href="/dish/pig">豬肉</a>
-                </li>
-                <li><a href="/dish/chicken">雞肉</a>
-                </li>
-                <li><a href="/dish/lamb">羊肉</a>
-                </li>
-                <li><a href="/dish/seafood">海鮮</a>
-                </li>
-                <li><a href="/dish/vegetables">蔬菜</a>
-                </li>
-                <li><a href="/dish/agaricus">菇類</a>
-                </li>
+    <link href="{% static "css/style5.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON"/>
+{% endblock %}
+{% block content %}
+    {% include 'layout/header.html' %}
+    <div class="img_ex">
+        <div>
+            <img src="{% static "images/豬/三層豬.jpg" %}"/>
+        </div>
+        <div>
+            <img src="{% static "images/店內/燒烤_210302_47.jpg" %}"/>
+        </div>
+        <div>
+            <img src="{% static "images/店內/燒烤_210302_48.jpg" %}"/>
+        </div>
+        <div>
+            <img src="{% static "images/店內/燒烤_210302_46.jpg" %}"/>
+        </div>
+    </div>
+    <div class="aboutpoem">
+        <div class="poem">
+            醬香撲鼻人潮來， <br>
+            食材新鮮無例外， <br>
+            烤功一流大家讚， <br>
+            讓人垂涎離不開。 <br>
+        </div>
+    </div>
+    <div class="abouttxt" style="margin: auto;width: 70%;">
+        <p class="txt">
+            我們燒烤店於2019年 7月開幕，從開幕到現在甚至到未來我們一直秉持著食材的品質，以及用料大方實在，以至於備受顧客們的肯定與支持
+            ，利用先油炸後燒烤的方式，讓肉品鎖住肉汁，再搭配著獨門醬料下去燒烤，讓顧客品嘗到醬香與肉汁的融合。<br><br>
+            如今因應網路購物的發展蓬勃，本店遂推出網路訂購餐點的服務，一方面讓新來的顧客們可以快速地瀏覽本店餐點，另一方面讓顧客們在家也能品嘗到心心念念的烤肉香。
+        </p>
+    </div>
+    <div class="bottom" style="display: flex;flex-direction: column;align-items: center;">
+        <img src="{% static "images/招牌.png" %}" alt="招牌圖">
+        <div class="bottom-options" style="text-align: center;">
+            <ul style="margin-top: 5%;">
+                <li class="tel">TEL :(02) 2909-0855</li>
+                <li class="line">客服LINE : @088alotv</li>
+                <li class="mail">電子郵件 : wiwi19991214@gmail.com</li>
             </ul>
-        </li>
-        <li><a href="/contactus">聯絡我們</a>
-        </li>
-     </ul>
-</div>
-</div>
-
-<div class="img_ex" >
-
-    <div>
-		<img  src="{% static "images/豬/三層豬.jpg"  %}"  />
+            <br><br>
+            <ul>
+                <li class="address">地址 :新北市泰山區明志路一段164號</li>
+                <li class="time">營業時間 : 星期一 至 星期六 下午 5 點 至 晚上 12 點 || 周日公休</li>
+            </ul>
+            <br>
+        </div>
     </div>
-    <div>
-		<img  src="{% static "images/店內/燒烤_210302_47.jpg" %}"  />
-    </div>
-    <div>
-		<img  src="{% static "images/店內/燒烤_210302_48.jpg" %}"  />
-    </div>
-    <div>
-		<img  src="{% static "images/店內/燒烤_210302_46.jpg" %}"  />
-    </div>
-</div>
-
-<div class="aboutpoem">
-<div class="poem"  style="display: flex; align-items: center;">
-
-
-        醬香撲鼻人潮來， <br>
-        食材新鮮無例外， <br>
-        烤功一流大家讚， <br>
-        讓人垂涎離不開。 <br>
-</div>
-
-</div>
-
-<div class="abouttxt">
-    <p class="txt">
-        我們燒烤店於2019年 7月開幕，從開幕到現在甚至到未來我們一直秉持著食材的品質，以及用料大方實在，以至於備受顧客們的肯定與支持
-        ，利用先油炸後燒烤的方式，讓肉品鎖住肉汁，再搭配著獨門醬料下去燒烤，讓顧客品嘗到醬香與肉汁的融合。<br><br>
-        如今因應網路購物的發展蓬勃，本店遂推出網路訂購餐點的服務，一方面讓新來的顧客們可以快速地瀏覽本店餐點，另一方面讓顧客們在家也能品嘗到心心念念的烤肉香。
-    </p>
-</div>
-
-<div class="bottom">
-    <img src="{% static "images/招牌.png" %}" alt="招牌圖">
-    <div class="bottom-options">
-    <ul  style="margin-top: 5%;">
-        <li class="tel">TEL :(02) 2909-0855</li>
-        <li class="line">客服LINE : @088alotv</li>
-        <li class="mail">電子郵件 : wiwi19991214@gmail.com</li>
-    </ul>
-    <br><br>
-    <ul>
-        <li class="address">地址 :新北市泰山區明志路一段164號</li>
-        <li class="time">營業時間  :  星期一  至  星期六 下午 5 點 至 晚上 12 點  || 周日公休</li>
-    </ul>
-    <br>
-    </div>
-</div>
-
-<div class="footer">
-       &copy;Copyright 2021 Pang Ger 胖哥燒烤
-</div>
-
-
-</body>
-</html>
+{% endblock %}

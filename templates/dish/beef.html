@@ -1,0 +1,19 @@
+{% extends "dish/dish_base.html" %}
+{% load static %}
+{% block title %}
+    <title>菜單-牛肉</title>
+{% endblock %}
+{% block content_dish %}
+    {% csrf_token %}
+    {% for beef in beefs %}
+        <div class="food">
+            <img src="/static/images/牛/{{ beef.imgname }}.jpg"/>
+            <font id='sales'>{{ beef.salename }}</font>
+            <div>
+                數量<input type="number" name="number" onchange="count()" id='ex-1' placeholder="1-99" />
+                $<font id="saleprice" name="num">{{ beef.saleprice }}</font>元
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+

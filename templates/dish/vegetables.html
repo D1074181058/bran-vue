@@ -1,0 +1,17 @@
+{% extends "dish/dish_base.html" %}
+{% load static %}
+{% block title %}
+    <title>菜單-蔬菜</title>
+{% endblock %}
+{% block content_dish %}
+    {% for vegetable in vegetables %}
+        <div class="food">
+            <img src="/static/images/蔬菜/{{ vegetable.imgname }}.jpg"/>
+            <font id='sales'>{{ vegetable.salename }}</font>
+            <div>
+                <font>數量</font><input type="number" name="number" onchange="count()" id='ex-1' placeholder="1-99">
+                $<font id="saleprice" name="num">{{ vegetable.saleprice }}</font>元
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

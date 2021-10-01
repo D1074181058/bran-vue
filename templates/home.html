@@ -1,88 +1,41 @@
-<html>
-<head>
-<title>燒烤店 </title>
-{% load static %}
-    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css" />
-    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON" />
-</head>
-<body style="background-color:PapayaWhip">
-
-<div style="text-align:right">
-    {% if log == 'login' %}
-        <a id="account">{{ message }}</a>
-    <a>/</a>
-    <a  href="logout" onclick="" >登出</a>
-    {% else %}
-    <a href="/login">登入</a>
-    <a>/</a>
-    <a href="/signup">註冊</a>
-    {% endif %}
-</div>
-<div>
-<div class="_left">
-    <span style="vertical-align:middle">
-    <a href="/">
-        <img  src="{% static "images/招牌.png" %}" />
-    </a>
-    </span>
-     <ul class="drop-down-menu" >
-        <li><a href="/aboutus">品牌</a>
-        </li>
-        <li><a href="/newinfo">最新消息</a>
-        </li>
-         <li><a href="">菜色種類</a>
-            <ul>
-                <li><a href="/dish/beef">牛肉</a>
-                </li>
-                <li><a href="/dish/pig">豬肉</a>
-                </li>
-                <li><a href="/dish/chicken">雞肉</a>
-                </li>
-                <li><a href="/dish/lamb">羊肉</a>
-                </li>
-                <li><a href="/dish/seafood">海鮮</a>
-                </li>
-                <li><a href="/dish/vegetables">蔬菜</a>
-                </li>
-                <li><a href="/dish/agaricus">菇類</a>
-                </li>
-            </ul>
-        </li>
-        <li><a href="/contactus">聯絡我們</a>
-        </li>
-     </ul>
-</div>
-</div>
-
-<div class="img_ex" >
-    <div>
-		<img  src="{% static "images/店內/菜色1.jpg" %}"  />
+{% extends "layout/app.html" %}
+{% block title %}
+    <title>燒烤店</title>
+{% endblock %}
+{% block link %}
+    {% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "images/fire.ico" %}" rel="SHORTCUT ICON"/>
+{% endblock %}
+{% block content %}
+    {% include 'layout/header.html' %}
+    <div class="img_ex">
+        <div>
+            <img src="{% static "images/店內/菜色1.jpg" %}"/>
+        </div>
+        <div>
+            <img src="{% static "images/店內/菜色2.jpg" %}"/>
+        </div>
     </div>
-    <div>
-		<img  src="{% static "images/店內/菜色2.jpg"  %}"  />
-    </div>
-</div>
-<div id="footer" style="text-align: center; margin-top:10%">
-            &copy;Copyright 2021 Pang Ger 胖哥燒烤
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function logout(){
-        $.ajax({
-                        url: "/hlogout/",
-                        type: "POST",
-                        dataType:"json",
-                         data: {
-                            srfmiddlewaretoken: '{{ csrf_token }}',
-                            },success:function (data){
-                            data = JSON.parse(data);
-                            console.log(data);
-                            location.reload();
-                              }
+{% endblock %}
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function logout() {
+            $.ajax({
+                url: "/hlogout/",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    srfmiddlewaretoken: '{{ csrf_token }}',
+                }, success: function (data) {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    location.reload();
+                }
 
-        })
-    }
-</script>
-</body>
-</html>
+            })
+        }
+    </script>
+{% endblock %}{% comment %}{% endcomment %}
 

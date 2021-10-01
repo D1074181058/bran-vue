@@ -1,0 +1,45 @@
+{% load static %}
+<div style="width: 85%;text-align:right;margin-bottom: 30px;">
+    {% if log == 'login' %}
+        {{ message }}
+        <a>/</a>
+        <a href="/logout">登出</a>
+    {% else %}
+        <a href="/login">登入</a>
+        <a>/</a>
+        <a href="/signup">註冊</a>
+    {% endif %}
+</div>
+<div class="_left">
+    <span style="vertical-align:middle">
+    <a href="/">
+        <img src="{% static "images/招牌.png" %}"/>
+    </a>
+    </span>
+    <ul class="drop-down-menu">
+        <li><a href="/aboutus">品牌</a>
+        </li>
+        <li><a href="/newinfo">最新消息</a>
+        </li>
+        <li><a href="#">菜色種類</a>
+            <ul>
+                <li><a href="/dish/beef">牛肉</a>
+                </li>
+                <li><a href="/dish/pig">豬肉</a>
+                </li>
+                <li><a href="/dish/chicken">雞肉</a>
+                </li>
+                <li><a href="/dish/lamb">羊肉</a>
+                </li>
+                <li><a href="/dish/seafood">海鮮</a>
+                </li>
+                <li><a href="/dish/vegetables">蔬菜</a>
+                </li>
+                <li><a href="/dish/agaricus">菇類</a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="/contactus">聯絡我們</a>
+        </li>
+    </ul>
+</div>

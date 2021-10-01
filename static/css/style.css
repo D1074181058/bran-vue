@@ -1,117 +1,10 @@
-html{
-    -webkit-text-size-adjust:none;
-text-size-adjust: none;
+html, body {
+    height: 100%
 }
-.info{
+
+.info {
     color: #ff0000;
-    fomt-size:1.5em;
-}
-ul { /* 取消ul預設的內縮及樣式 */
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-
-    ul.drop-down-menu {
-
-        display: inline-block;
-        font-family: 'Open Sans', Arial, sans-serif;
-        font-size: 13px;
-
-    }
-
-    ul.drop-down-menu li {
-        position: relative;
-        white-space: nowrap;
-        border-right: #ccc 1px solid;
-    }
-
-    ul.drop-down-menu > li:last-child {
-        border-right: none;
-    }
-
-    ul.drop-down-menu > li {
-        float: left; /* 只有第一層是靠左對齊*/
-
-    }
-
-     ul.drop-down-menu a {
-        background-color:PapayaWhip;
-        color: #333;
-        display: block;
-        padding: 0 30px;
-        text-decoration: none;
-        line-height: 40px;
-
-    }
-    ul.drop-down-menu a:hover { /* 滑鼠滑入按鈕變色*/
-        color: #ef5c28;
-         -webkit-transition:color 0.5s;
-    }
-    ul.drop-down-menu li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色*/
-        color: #ef5c28;
-        -webkit-transition:color 0.5s;
-    }
-      ul.drop-down-menu ul {
-        border: #ccc 1px solid;
-        position: absolute;
-        z-index: 99;
-        left: -1px;
-        top: 100%;
-         min-width: 180px;
-
-    }
-
-    ul.drop-down-menu ul li {
-        border-bottom: #ccc 1px solid;
-    }
-
-    ul.drop-down-menu ul li:last-child {
-        border-bottom: none;
-    }
-
-    ul.drop-down-menu ul ul { /*第三層以後的選單出現位置與第二層不同*/
-        z-index: 999;
-        top: 10px;
-        left: 90%;
-    }
-     ul.drop-down-menu ul { /*隱藏次選單*/
-        display: none;
-    }
-
-    ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
-        display: block;
-
-    }
-
-
-
-.img_ex {
-
-    margin:0 auto;
-    margin-top: 5%;
-    width:90%;
-    height:100%;
-
-    position: relative;
-
-    border-color: #fff;
-    border-bottom-width: 500px;
-    background-color: #f5f5f5;
-
-}
-
-.img_ex div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-
-.img_ex div {
-    -webkit-animation: round 10s linear infinite;
-            animation: round 10s linear infinite;
+    fomt-size: 1.5em;
 }
 
 @-webkit-keyframes round {
@@ -131,6 +24,7 @@ ul { /* 取消ul預設的內縮及樣式 */
         /* 5-6秒淡出*/
     }
 }
+
 @keyframes round {
     10% {
         opacity: 1;
@@ -149,134 +43,118 @@ ul { /* 取消ul預設的內縮及樣式 */
     }
 }
 
+.img_ex div {
+    -webkit-animation: round 10s linear infinite;
+    animation: round 10s linear infinite;
+}
+
 .img_ex div:nth-child(2) {
     -webkit-animation-delay: 0s;
-            animation-delay: 0s;
+    animation-delay: 0s;
 }
 
 .img_ex div:nth-child(1) {
     -webkit-animation-delay: 5s;
-            animation-delay: 5s;
+    animation-delay: 5s;
 }
 
-.img_ex:hover div {
-    -webkit-animation-play-state: paused;
-            animation-play-state: paused;
-}
-.img_ex div {
-
-    width: 100%;
-    height:100%;
-}
-
-.img_ex div img{
-
-    width: 100%;
-    height:100%;
-}
-
-
-._left{
-width:100%;
-height:15%;
-
-}
-._left a{
-    text-decoration:none;
-}
-._left a img {
-    width:30%;
-    height:100%;
-    margin-right: 10%;
-}
-table{
-margin-left:auto;
-margin-right:auto;
-}
-.center{
-margin-left: 35%;
+table {
+    margin: auto;
 }
 
 input {
-    padding:15px 15px;
-    border:1px black solid;
-    cursor:pointer;
+    padding: 15px 15px;
+    border: 1px black solid;
+    cursor: pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
-.cap td input{
-  width:30%;
-  height:40%;
-}
-._log{
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:10%;
-    width:50%;
-    height:100%;
+
+._log {
+    margin: 30px auto;
+    max-width: 768px;
     padding: 1.25rem;
-    box-shadow:0px 0px 20px black;
+    box-shadow: 0px 0px 20px black;
 }
 
+@media screen and (max-width: 768px) {
+    ._log {
+        max-width: 350px;
+    }
+}
 
+.captcha {
+    width: 82px;
+    vertical-align: inherit;
+}
 
+#id_captcha_1 {
+    width: 56%;
+    height: 40%;
+}
 
-.contactus-all{
-margin-left: 10%;
-margin-right: auto;
-width:80%;
-height:100%;
-display:inline-block;
-box-shadow:0px 0px 20px black;
+.contactus-all {
+    padding: 20px 20px 20px 20px;
+    background-color: NavajoWhite;
+    max-width: 1080px;
+    margin: 10px auto;
+    box-shadow: 0px 0px 20px black;
 }
-.contact-1{
-width:40%;
-height:100%;
-float:right;
-display:inline-block;
+
+@media screen and (max-width: 640px) {
+    .contactus-all {
+        max-width: 360px;
+    }
 }
-.contactus-lab{
-width:54%;
-height:50%;
-line-height:200%;　
-padding:15px;　
-margin:20%;
-font-size:120%;
-float:left;
+
+.contact-1 {
+    width: 46%;
+    height: 100%;
+    display: inline-block;
 }
-.contactus-bottom{
-margin:0px 3%;
-margin-top:5%;
-width:100%;
-height:30px;
+
+@media screen and (max-width: 640px) {
+    .contact-1 {
+        width: 100%;
+    }
 }
-.contact-footer{
-    text-align:left;
-    width:50%;
-    height:100px;
-    margin-top: 5%;
-    margin-left: 45%;
+
+.contactus-lab {
+    width: 54%;
+    height: 50%;
+    line-height: 200%;
+    /*padding: 15px;*/
+    /*margin: 20%;*/
+    font-size: 120%;
 }
-.contact-content{
-    width:40%;
-    height:100%;
+
+@media screen and (max-width: 640px) {
+    .contactus-lab {
+        font-size: 80%;
+        width: 100%;
+    }
+}
+
+.contactus-bottom {
+    margin: 5% 3% 0px;
+    width: 100%;
+}
+
+.contact-content {
     margin-right: 2%;
-    line-height:500%;
-    float:left;
-    margin-left: 3%;
-}
-.contact-text{
-    width:10%;
-    height:100%;
-    line-height:500%;
-    float:left;
+    line-height: 500%;
 }
 
-.tb-td td{
-    border:1px solid black;
-    background-color:white;
+.contact-text {
+    line-height: 500%;
 }
-#button:hover{
-      background-color:red;
-     -webkit-transition:color 3s;
+
+.tb-td td {
+    border: 1px solid black;
+    background-color: white;
+}
+
+#button:hover {
+    background-color: red;
+    -webkit-transition: color 3s;
 }
