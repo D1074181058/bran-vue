@@ -82,13 +82,13 @@ ul.drop-down-menu2 li:hover > ul { /* 滑鼠滑入展開次選單*/
 }
 
 .food {
-    width:30%;
+    width:200px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .food div input{
-    width: 19%;
+    width: 60px;
 }
 
 
